@@ -1,14 +1,17 @@
+using System.Text;
 using AutoMapper;
 using DataViewBackend.Repository;
 using DataViewBackend.Repository.IRepository;
 using DataViewBackend.Data;
 using DataViewBackend.Mapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace DataViewBackend
@@ -25,9 +28,11 @@ namespace DataViewBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IProductDataRepository, ProductDataRepository>(); 
             services.AddScoped<IToolDataRepository, ToolDataRepository>(); 
+            services.AddScoped<IUserDataRepository, UserDataRepository>(); 
             services.AddScoped<IGetOnlyDataRepository, GetOnlyRepositoryData>(); 
             services.AddScoped<IProductCommentDataRepository, ProductCommentDataRepository>(); 
             services.AddAutoMapper(typeof(Mappings));
@@ -39,6 +44,29 @@ namespace DataViewBackend
                     Version = "1"
                 });
             });
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
+                })
+                ;
             services.AddControllers();
         }
 
@@ -58,9 +86,9 @@ namespace DataViewBackend
                 options.RoutePrefix = "";
             });
             app.UseRouting();
-
-            //app.UseAuthorization();
-
+            app.UseCors(a => a.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

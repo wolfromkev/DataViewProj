@@ -8,13 +8,13 @@ namespace DataViewBackend.Models.Dto
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public string Name { get; set; }
         public string Phone { get; set; }
-        [Required]
         public string Tool { get; set; }
+        [NotMapped]
+        public string Token { get; set; }
     }
 }
