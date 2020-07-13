@@ -1,0 +1,23 @@
+html,
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgb(31, 31, 31);
+    background: linear-gradient(180deg, rgb(24, 24, 24) 50%, rgb(13, 0, 31) 100%);
+    background-attachment: fixed;
+    margin: 0;
+
+}
+
+.container {
+    margin: 1rem ;
+
+}
+
+a {
+    text-decoration: none;
+}
+

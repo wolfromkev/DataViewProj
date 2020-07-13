@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="coredb@kevinwolfromserver.database.windows.net" uuid="b99daa31-a912-4e51-a7be-65055bf878eb">
+      <driver-ref>azure.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://kevinwolfromserver.database.windows.net:1433;database=coredb</jdbc-url>
+    </data-source>
+  </component>
+</project>

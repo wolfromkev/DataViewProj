@@ -1,0 +1,15 @@
+.mainCard{
+    background-color: #1c1c1c;
+    color: white;
+}
+.yieldDataContainer{
+margin: 0 -2rem 0 -3rem;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+.button1{
+    margin: 0 1rem;
+}

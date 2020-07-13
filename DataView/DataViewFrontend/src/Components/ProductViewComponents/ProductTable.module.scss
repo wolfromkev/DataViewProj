@@ -1,0 +1,47 @@
+.tableStyle{
+    color: white !important;
+}
+
+table {
+    border-spacing: 0;
+    border: 1px solid #ffffff;
+
+tr {
+:last-child {
+td {
+    border-bottom: 0;
+}
+}
+}
+
+th,
+td {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+
+:last-child {
+    border-right: 0;
+}
+}
+}
+
+.selectButton{
+    border-radius:4px;
+    border:1px solid #4b8f29;
+    display:inline-block;
+    color:#ffffff;
+    background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%) !important;
+    background-color:#77b55a;
+    box-shadow: 0px 10px 14px -7px #3e7327;
+    cursor: pointer;
+    padding:6px 12px;
+    font-size:13px;
+    font-weight:bold;
+    font-family:Arial;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #5b8a3c;
+}
+
+

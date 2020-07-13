@@ -1,0 +1,57 @@
+.middleRow{
+    margin: 1rem 0;
+}
+.datagraphs{
+    background-color: #1c1c1c;
+    color: white;
+
+}
+.title{
+    color:white;
+}
+
+
+.searchBox {
+    position: absolute;
+    right: 0;
+    top: 1.5rem;
+    right: 2rem;
+}
+
+.tableContainer{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 3rem -4rem;
+}
+
+.modal{
+    width: 75rem;
+    max-width: none !important;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.modal div{
+    background-color: #282828;
+}
+
+.modalBody{
+   margin: 2rem 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    color: white !important;
+}
+
+.modalHeader{
+    color: white;
+}
+.closeButton{
+    color: white
+}
+.closeButton:hover{
+    color: white
+}

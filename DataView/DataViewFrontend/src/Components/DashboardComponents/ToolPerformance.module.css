@@ -1,0 +1,18 @@
+.toolPerformanceContainer{
+    margin-bottom: 1rem ;
+}
+
+.mainCard{
+    background-color: #1c1c1c;
+    color: white;
+;
+}
+
+
+.container{
+    height: 50rem;
+    margin-left: -3rem;
+}
+.graph{
+    height: 100% !important;
+}
