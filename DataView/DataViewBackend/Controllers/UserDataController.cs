@@ -40,7 +40,7 @@ namespace DataViewBackend.Controllers
                 return BadRequest(new {message = "Email address already exists"});
             }
 
-            var user = _userRepo.Register(model.Email, model.Password);
+            var user = _userRepo.Register(model.Email, model.Password, model.FirstName, model.LastName);
             if (user == null)
             {
                 return BadRequest(new {message = "Error while registering user"});

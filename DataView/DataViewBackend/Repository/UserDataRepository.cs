@@ -57,12 +57,14 @@ namespace DataViewBackend.Repository
             return user;
         }
 
-        public UserData Register(string emailAddress, string password)
+        public UserData Register(string emailAddress, string password, string firstName, string lastName)
         {
             UserData userObj = new UserData()
             {
                 Email = emailAddress,
-                Password = password
+                Password = password,
+                FirstName = firstName,
+                LastName = lastName,
             };
             _db.UserData.Add(userObj);
             _db.SaveChanges();

@@ -6,6 +6,6 @@ namespace DataViewBackend.Repository.IRepository
     {
         bool IsUniqueUser(string emailAddress);
         UserData Authenticate(string emailAddress, string password);
-        UserData Register(string emailAddress, string password);
+        UserData Register(string emailAddress, string password, string firstName, string lastName);
     }
 } 
