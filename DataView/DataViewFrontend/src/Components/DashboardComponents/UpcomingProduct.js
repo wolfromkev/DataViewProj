@@ -1,14 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Col,
-  Button,
-  Row,
-} from "reactstrap";
+import { Card, CardBody, CardTitle, Col, Button, Row } from "reactstrap";
+import CardHeader from "reactstrap/es/CardHeader";
 import classes from "./UpcomingProduct.module.css";
 import classNames from "classnames";
 import ReactEcharts from "echarts-for-react";
@@ -28,6 +21,8 @@ function UpcomingProduct(props) {
 
   let today = moment();
   let today2 = moment();
+  let today3 = moment().add(7, "day");
+
   let option = {
     color: ["#3398DB"],
     tooltip: {
@@ -85,13 +80,17 @@ function UpcomingProduct(props) {
     <Fragment>
       <Col lg="6">
         <Card className={classNames("card-chart", classes.upcomingProductCard)}>
-          <CardHeader>
+          <CardHeader classname={classes.header}>
             <Row>
               <Col className="text-left" sm="6">
-                <h5> Upcoming Product Volume</h5>
-                <CardTitle tag="h2">
+                <h5 className={classes.textcolor}>
+                  {" "}
                   {today2.add(weekIndex, "day").format("l")} -{" "}
-                  {today2.add(weekIndex, "day").format("l")}
+                  {today3.add(weekIndex, "day").format("l")}
+                </h5>
+                <CardTitle tag="h2" className={classes.textcolor}>
+                  {" "}
+                  Product Forecast
                 </CardTitle>
               </Col>
               <Col sm="6">

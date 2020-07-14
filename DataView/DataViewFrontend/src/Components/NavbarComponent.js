@@ -27,7 +27,7 @@ export default function NavbarComponent() {
               <Link to="/productview"> Product View </Link>
             </span>
             <span className={classes.item}>
-              <Link to="/toolview"> Tool View </Link>
+              <Link to="/landingpage"> landing </Link>
             </span>
           </span>
         </Nav>

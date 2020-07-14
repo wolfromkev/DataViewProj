@@ -62,8 +62,6 @@ m
 =src/Components/ProductViewComponents/ProductTable.module.scss,0/f/0fe1b11995a756de33649f0151e8b363dc7235ed
 h
 8src/Components/ProductViewComponents/DefectPolarCords.js,0/1/01f4af9bfd6d705ca01c46175156c91f0e9488f9
-`
-0src/Components/ProductViewComponents/makeData.js,2/9/29ae5623e0537f07c90b8c512e5c5a818ee660e8
 p
 @src/Components/ProductViewComponents/StackedLineGraph.module.css,0/5/057cae5d57a62b261db53ed769ad1beb86a01b77
 h

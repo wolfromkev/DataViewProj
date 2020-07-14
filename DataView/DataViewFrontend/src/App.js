@@ -5,11 +5,10 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { getAllProductData } from "./Redux/actions/productDataActions";
-
 import NavbarComponent from "./Components/NavbarComponent";
 import Dashboard from "./Pages/Dashboard";
 import ProductView from "./Pages/ProductView";
-import ToolView from "./Pages/ToolView";
+import LandingPage from "./Pages/LandingPage";
 import store from "./Redux/store";
 import {
   getUpcomingProductData,
@@ -34,7 +33,7 @@ export default function App() {
           <div className={classes.container}>
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/productview" component={ProductView} />
-            <Route exact path="/toolview" component={ToolView} />
+            <Route exact path="/landingPage" component={LandingPage} />
           </div>
         </Switch>
       </BrowserRouter>

@@ -8,9 +8,6 @@ const initialState = {};
 
 const reducers = combineReducers({
   miscData: miscDataReducer,
-  // productData: productCommentsReducer,
-  // toolData: toolDataReducer,
-  // defectSummaries: defectSummariesReducer,
   productData: productDataReducer,
 });
 

@@ -1,15 +1,15 @@
-.middleRow{
-    margin: 1rem 0;
-}
 .datagraphs{
     background-color: #1c1c1c;
     color: white;
-
+    top: -1rem
 }
 .title{
     color:white;
 }
 
+.header{
+    background-color: #1c1c1c !important;
+}
 
 .searchBox {
     position: absolute;

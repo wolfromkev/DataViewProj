@@ -188,19 +188,31 @@ function ToolPerformance(props) {
         silent: true,
         data: [
           {
-            yAxis: 50,
-          },
-          {
             yAxis: 100,
-          },
-          {
-            yAxis: 150,
           },
           {
             yAxis: 200,
           },
           {
             yAxis: 300,
+          },
+          {
+            yAxis: 400,
+          },
+          {
+            yAxis: 500,
+          },
+          {
+            yAxis: 600,
+          },
+          {
+            yAxis: 700,
+          },
+          {
+            yAxis: 800,
+          },
+          {
+            yAxis: 900,
           },
         ],
       },

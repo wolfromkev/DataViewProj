@@ -47,9 +47,9 @@ function ProductView(props) {
   );
   return (
     <Fragment>
-      <Row className={classes.middleRow}>
+      <Row>
         <Col>
-          <CardHeader>
+          <CardHeader className={classes.header}>
             <Row>
               <Col className={classNames("text-left", classes.title)} sm="6">
                 <h5 className="card-category" onClick={toggleModal}>

@@ -1,0 +1,145 @@
+@mixin buttonStuff {
+  color: #fff !important;
+  border: none;
+  position: relative;
+  padding: 1rem 1rem;
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 40px;
+  width: 15rem;
+  text-align: center;
+  cursor: pointer;
+  background-size: 400%;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+}
+
+.errorMessage {
+  position: relative;
+  color: #ff4747;
+}
+.welcomeHeader {
+  text-align: center;
+  color: white;
+}
+
+.submitButtonContainer,
+.loginSignupButtonContainer {
+  margin: 1rem 0 1rem 0;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.demoButtonContainer {
+  margin: 1rem 0 1rem 0;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.container input {
+  color: #ffffff;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #00b8d2;
+  outline: none;
+  background: transparent;
+}
+
+.labelText {
+  color: #00b8d2;
+}
+
+.submitButton {
+  @include buttonStuff;
+  background: linear-gradient(
+    90deg,
+    #0071fa,
+    #f441a4,
+    #ffeb3b,
+    #03a9f4,
+    #0071fa
+  );
+  background-size: 400%;
+  z-index: 1;
+  &:hover {
+    animation: animate 8s linear infinite;
+  }
+}
+
+.loginSignupButton {
+  @include buttonStuff;
+  background: linear-gradient(
+    90deg,
+    #ff0026,
+    #ea00c3,
+    #ff5200,
+    #fcdd00,
+    #ff0026
+  );
+  background-size: 400%;
+  z-index: 1;
+  &:hover {
+    animation: animate2 8s linear infinite;
+  }
+}
+
+.demoButton {
+  @include buttonStuff;
+  background: linear-gradient(
+    90deg,
+    #0cb400,
+    #0bee44,
+    #0099ff,
+    #3780ff,
+    #00e1ff,
+    #0cb400
+  );
+  background-size: 400%;
+  z-index: 1;
+  &:hover {
+    animation: animate2 8s linear infinite;
+  }
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+@keyframes animate3 {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 400%;
+  }
+}

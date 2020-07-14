@@ -1,6 +1,6 @@
 .upcomingProductCard{
     background-color: #1c1c1c;
-    color: white;
+
 }
 
 .button1{
@@ -15,4 +15,8 @@ margin: 0 1rem;
 .upcomingProductContainer{
     margin: 0 -2rem 0 -3rem;
 
+}
+
+.textcolor{
+    color:white;
 }
