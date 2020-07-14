@@ -8,8 +8,7 @@ import {
 
 import Axios from "axios";
 
-export const loginUser = (userData, history) => (dispatch) => {
-  console.log("hello");
+export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   Axios.post("/UserData/authenticate", userData)
     .then((res) => {
@@ -27,9 +26,8 @@ export const loginUser = (userData, history) => (dispatch) => {
     });
 };
 
-export const signUpUser = (newUserData, history) => (dispatch) => {
-  dispatch({ type: LOADING_USER });
-  Axios.post("/UserData/register", newUserData)
+export const signUpUser = (data) => (dispatch) => {
+  Axios.post("/UserData/register", data)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch({ type: SET_USER, payload: res.data });

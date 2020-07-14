@@ -55,7 +55,10 @@ function ProductView(props) {
                 <h5 className="card-category" onClick={toggleModal}>
                   Product Overview
                 </h5>
-                <CardTitle tag="h2">Product ID: {product}</CardTitle>
+                <CardTitle tag="h2">
+                  Product ID: {product} -{" "}
+                  {graphData ? graphData.totalData[5] : null} Total Defects
+                </CardTitle>
               </Col>
               <Col sm="6">
                 <div className={classes.searchBox}>

@@ -79,15 +79,6 @@ function StackedLineGraph(props) {
         smooth: true,
         data: unknownData,
       },
-      {
-        name: "Total",
-        type: "bar",
-        barWidth: 25,
-        barGap: "-50%",
-        smooth: true,
-        data: totalData,
-        color: "grey",
-      },
     ],
   };
 

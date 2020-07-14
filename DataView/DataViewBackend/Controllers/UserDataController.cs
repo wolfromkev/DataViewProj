@@ -46,7 +46,7 @@ namespace DataViewBackend.Controllers
                 return BadRequest(new {message = "Error while registering user"});
             }
 
-            return Ok();
+            return Ok(user);
         }
     }
 }

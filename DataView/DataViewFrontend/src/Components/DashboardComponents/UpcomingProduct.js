@@ -24,7 +24,7 @@ function UpcomingProduct(props) {
   let today3 = moment().add(7, "day");
 
   let option = {
-    color: ["#3398DB"],
+    color: ["#ffd400"],
     tooltip: {
       trigger: "axis",
       axisPointer: {

@@ -90,7 +90,7 @@ function YieldData(props) {
     series: [
       {
         itemStyle: {
-          color: "white",
+          color: "#ba005d",
         },
         name: "Achieved Value",
         type: "bar",
@@ -101,7 +101,7 @@ function YieldData(props) {
 
       {
         itemStyle: {
-          color: "blue",
+          color: "orange",
         },
         name: "Goal Value",
         type: "bar",
