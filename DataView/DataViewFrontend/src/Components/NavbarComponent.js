@@ -3,8 +3,10 @@ import classes from "./NavbarComponent.module.css";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { Navbar, NavbarToggler, NavbarBrand, Nav } from "reactstrap";
+import { logoutUser } from "../Redux/actions/userDataActions";
+import { connect } from "react-redux";
 
-export default function NavbarComponent() {
+function NavbarComponent(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -15,23 +17,30 @@ export default function NavbarComponent() {
         className={classNames("card-card-chart", classes.NavbarComponent)}
         expand="md"
       >
-        <NavbarBrand>DataView</NavbarBrand>
+        <NavbarBrand className={classes.Logo}>DataView</NavbarBrand>
         <NavbarToggler onClick={toggle} />
 
         <Nav className="mr-auto" navbar>
           <span className={classes.linkContainer}>
             <span className={classes.item}>
-              <Link to="/"> Home</Link>
+              <Link to="/dashboard"> Dashboard</Link>
             </span>
             <span className={classes.item}>
               <Link to="/productview"> Product View </Link>
             </span>
-            <span className={classes.item}>
-              <Link to="/landingpage"> landing </Link>
-            </span>
           </span>
         </Nav>
+        <span className={classes.logout}>
+          <a onClick={() => props.logoutUser()}>Logout</a>
+        </span>
       </Navbar>
     </div>
   );
 }
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+  logoutUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarComponent);

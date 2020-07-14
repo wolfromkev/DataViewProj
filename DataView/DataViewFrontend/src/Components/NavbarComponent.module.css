@@ -10,3 +10,13 @@
     color: white;
 ;
 }
+
+.logout{
+    justify-self: flex-end;
+    margin: 0 0.5rem;
+    color: white;
+    cursor: pointer;
+}
+.Logo{
+    content: "DateView";
+}

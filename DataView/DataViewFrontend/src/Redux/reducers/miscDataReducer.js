@@ -2,10 +2,6 @@ import {
   LOADING_MISC_DATA,
   GET_WEEKLY_YIELD_DATA,
   GET_UPCOMING_PROD_DATA,
-  GET_USER_DATA_ALL,
-  GET_USER_DATA,
-  LOADING_PRODUCT_DATA,
-  GET_PRODUCT_DATA,
 } from "../types";
 
 const initialState = {
@@ -32,12 +28,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         upcomingProductData: action.payload,
-        loading: false,
-      };
-    case GET_USER_DATA_ALL:
-      return {
-        ...state,
-        userData: action.payload,
         loading: false,
       };
 

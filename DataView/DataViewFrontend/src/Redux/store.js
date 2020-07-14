@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 
 import productDataReducer from "./reducers/productDataReducer";
 import miscDataReducer from "./reducers/miscDataReducer";
+import userDataReducer from "./reducers/userDataReducer";
 
 const initialState = {};
 
 const reducers = combineReducers({
   miscData: miscDataReducer,
   productData: productDataReducer,
+  userData: userDataReducer,
 });
 
 const store = createStore(
