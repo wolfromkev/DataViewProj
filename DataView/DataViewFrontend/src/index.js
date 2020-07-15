@@ -4,13 +4,19 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import store from "./Redux/store";
 import registerServiceWorker from "./registerServiceWorker";
-import { Provider, connect } from "react-redux";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+
+let persistor = persistStore(store);
 
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />{" "}
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   rootElement
 );

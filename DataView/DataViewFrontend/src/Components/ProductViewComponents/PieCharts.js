@@ -7,7 +7,6 @@ function PieCharts(props) {
 
   useEffect(() => {
     setData(props.graphData);
-    console.log(props.graphData);
   }, [props.graphData]);
 
   let chipData = data

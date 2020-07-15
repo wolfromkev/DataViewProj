@@ -7,7 +7,6 @@ function StackedLineGraph(props) {
   const [data, setData] = useState();
   useEffect(() => {
     setData(props.graphData);
-    console.log(props.graphData);
   }, [props.graphData]);
 
   let chipData = data ? data.chipData : null;
@@ -15,7 +14,6 @@ function StackedLineGraph(props) {
   let scratchData = data ? data.scratchData : null;
   let particleData = data ? data.particleData : null;
   let unknownData = data ? data.unknownData : null;
-  let totalData = data ? data.totalData : null;
 
   let option = {
     grid: {

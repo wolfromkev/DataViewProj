@@ -30,8 +30,11 @@ function NavbarComponent(props) {
             </span>
           </span>
         </Nav>
+        <span className={classes.profilebutton}>
+          <Link to="/profile"> Profile </Link>
+        </span>
         <span className={classes.logout}>
-          <a onClick={() => props.logoutUser()}>Logout</a>
+          <div onClick={() => props.logoutUser()}>Logout</div>
         </span>
       </Navbar>
     </div>

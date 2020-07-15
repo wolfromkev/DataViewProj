@@ -28,11 +28,7 @@ body {
 }
 
 .gradient {
-  background: linear-gradient(
-    135deg,
-    rgb(255, 0, 251) 25%,
-    rgb(255, 132, 0) 100%
-  );
+  background: linear-gradient(135deg, #606c88 25%, #3f4c6b 100%);
   position: absolute;
   top: 0;
   left: 0;

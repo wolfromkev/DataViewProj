@@ -1,11 +1,18 @@
+import React from "react";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
+
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import productDataReducer from "./reducers/productDataReducer";
 import miscDataReducer from "./reducers/miscDataReducer";
 import userDataReducer from "./reducers/userDataReducer";
 
-const initialState = {};
+const persistConfig = {
+  key: "root",
+  storage: storage,
+};
 
 const reducers = combineReducers({
   miscData: miscDataReducer,
@@ -13,9 +20,10 @@ const reducers = combineReducers({
   userData: userDataReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, reducers);
+
 const store = createStore(
-  reducers,
-  initialState,
+  persistedReducer,
   compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

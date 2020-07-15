@@ -1,0 +1,25 @@
+.gridContainer {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 2rem;
+  color: white;
+}
+.userInfoContainer {
+  background-color: #1c1c1c;
+  box-shadow: 5px 10px 8px rgba(36, 36, 36, 0.42);
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+  flex: 1;
+}
+
+.calendarContainer {
+  flex: 2;
+}
+
+.toDoContainer {
+  background-color: #1c1c1c;
+  box-shadow: 5px 10px 8px rgba(36, 36, 36, 0.42);
+  width: 100%;
+  border-radius: 5px;
+}

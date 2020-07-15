@@ -108,17 +108,17 @@ function SignupForm(props) {
           </div>
         </form>
         <div className={classes.loginSignupButtonContainer}>
-          <a
+          <button
             className={classes.loginSignupButton}
             onClick={() => props.loginSwitcher()}
           >
             Click to Log in
-          </a>
+          </button>
         </div>
         <div className={classes.loginSignupButtonContainer}>
-          <a className={classes.demoButton} onClick={demoButton}>
+          <button className={classes.demoButton} onClick={demoButton}>
             Demo
-          </a>
+          </button>
         </div>
       </div>
     </>

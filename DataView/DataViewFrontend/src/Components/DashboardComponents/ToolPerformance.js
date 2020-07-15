@@ -14,7 +14,6 @@ import {
   Col,
   Row,
 } from "reactstrap";
-import textStyle from "echarts/src/model/mixin/textStyle";
 
 function ToolPerformance(props) {
   const { productData } = props.productData;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginUser, signUpUser } from "../Redux/actions/userDataActions";
 import LandingPageTitle from "../Components/LandingPage/LandingPageTitle";

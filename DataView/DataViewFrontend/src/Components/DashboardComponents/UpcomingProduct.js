@@ -80,7 +80,7 @@ function UpcomingProduct(props) {
     <Fragment>
       <Col lg="6">
         <Card className={classNames("card-chart", classes.upcomingProductCard)}>
-          <CardHeader classname={classes.header}>
+          <CardHeader className={classes.header}>
             <Row>
               <Col className="text-left" sm="6">
                 <h5 className={classes.textcolor}>

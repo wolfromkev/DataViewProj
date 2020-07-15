@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import classes from "./ProductTable.module.scss";
 import { useTable, useFilters, useRowSelect } from "react-table";
 import { connect } from "react-redux";
@@ -90,14 +90,14 @@ function Table({ columns, data, parentCallback }) {
         {
           id: "selection",
           Cell: ({ row }) => (
-            <a
+            <button
               className={classes.selectButton}
               onClick={() => {
                 parentCallback(row.original.productId);
               }}
             >
               Select{" "}
-            </a>
+            </button>
           ),
         },
         ...columns,

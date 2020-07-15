@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/core": "^5.1.0",
     "@fullcalendar/daygrid": "^5.1.0",
+    "@fullcalendar/interaction": "^5.1.0",
     "@fullcalendar/react": "^5.1.0",
+    "@fullcalendar/timegrid": "^5.1.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.1.3",
     "classnames": "^2.2.6",
@@ -26,6 +29,7 @@
     "react-table": "^7.2.2",
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "rimraf": "^2.6.2",
     "yup": "^0.29.1"

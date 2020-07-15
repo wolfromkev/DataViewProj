@@ -4,9 +4,8 @@ body {
     font-family: "Poppins", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: rgb(31, 31, 31);
-    background: linear-gradient(135deg, #5a0056, #fd1796, #a74f02);
     background-attachment: fixed;
+    background: linear-gradient(90deg, #4b6cb7 25%, #182848 100%);
     margin: 0;
 }
 a {

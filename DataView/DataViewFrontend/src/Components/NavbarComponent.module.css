@@ -20,3 +20,8 @@
 .Logo{
     content: "DateView";
 }
+.profilebutton a{
+    margin-right: 1rem;
+    color: grey;
+    text-decoration: none;
+}
