@@ -4,13 +4,21 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dateClick from "@fullcalendar/interaction";
-import classes from "./Calendar.module.css";
-
-const events = [{ title: "event 1", data: "2020-07-20" }];
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import classes from "./Calendar.module.scss";
+import DateModal from "./CalendarModals/DateModal";
+import EventModal from "./CalendarModals/EventModal";
 
 function CalendarComp(props) {
-  const handleDateClick = () => {
-    console.log("hello");
+  const [eventData, setEventData] = useState(false);
+  const [dateModal, setDateModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
+
+  const toggleDate = (info) => {
+    setDateModal(!dateModal);
+  };
+  const toggleEvent = (info) => {
+    setEventModal(!eventModal);
   };
 
   return (
@@ -30,12 +38,37 @@ function CalendarComp(props) {
           list: "list",
         }}
         initialView="dayGridMonth"
-        dateClick={() => handleDateClick()}
+        dateClick={(info) => toggleDate(info)}
         events={[
-          { title: "event 1", date: "2020-07-01" },
-          { title: "event 2", date: "2020-07-01" },
+          {
+            title: "Personal Task",
+            date: "2020-07-01",
+            description: "Lecture",
+            backgroundColor: "red",
+            editable: "true",
+          },
+          {
+            title: "calendar Event",
+            start: "2020-07-10",
+            end: "2020-07-15",
+            editable: "true",
+          },
+          {
+            title: "External Task",
+            date: "2020-07-20",
+            description: "Lecture",
+            backgroundColor: "green",
+            editable: "true",
+          },
         ]}
+        eventClick={(info) => toggleEvent(info)}
       />
+      <Modal isOpen={dateModal} toggle={toggleDate} className={classes.Modal}>
+        <DateModal toggleDate={toggleDate} />
+      </Modal>
+      <Modal isOpen={eventModal} toggle={toggleEvent} className={classes.Modal}>
+        <EventModal toggleEvent={toggleEvent} />
+      </Modal>
     </div>
   );
 }

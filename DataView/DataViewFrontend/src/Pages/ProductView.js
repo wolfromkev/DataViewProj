@@ -77,23 +77,21 @@ function ProductView(props) {
         </Col>
       </Row>
 
-      <div className={classes.modalContainer}>
-        <Modal isOpen={modal} toggle={toggleModal} className={classes.modal}>
-          <ModalHeader
-            toggle={toggleModal}
-            close={closeBtn}
-            className={classes.modalHeader}
-          >
-            Product Search
-          </ModalHeader>
-          <div className={classes.modalBody}>
-            <ProductTable
-              tableData={tableData}
-              parentCallback={callbackFunction}
-            />
-          </div>
-        </Modal>
-      </div>
+      <Modal isOpen={modal} toggle={toggleModal} className={classes.modal}>
+        <ModalHeader
+          toggle={toggleModal}
+          close={closeBtn}
+          className={classes.modalHeader}
+        >
+          Product Search
+        </ModalHeader>
+        <div className={classes.modalBody}>
+          <ProductTable
+            tableData={tableData}
+            parentCallback={callbackFunction}
+          />
+        </div>
+      </Modal>
     </Fragment>
   );
 }
