@@ -1,0 +1,35 @@
+.header {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 30px;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+.Description {
+  word-wrap: break-word;
+  margin: 1rem;
+  border: none;
+  border-bottom: 1px solid #00b8d2;
+}
+
+.footer {
+  margin-top: 1rem;
+}
+
+.timeValues {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.pencilIcon {
+  cursor: pointer;
+}
+.descriptionTextArea {
+  color: #ffffff;
+  width: 90%;
+  margin: 1rem 0 1rem 1rem;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: transparent;
+}

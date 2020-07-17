@@ -6,7 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import dateClick from "@fullcalendar/interaction";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import classes from "./Calendar.module.scss";
-import DateModal from "./CalendarModals/DateModal";
+import DateModal from "./CalendarModals/DataModalSwitch/DateModal";
 import EventModal from "./CalendarModals/EventModal";
 
 function CalendarComp(props) {

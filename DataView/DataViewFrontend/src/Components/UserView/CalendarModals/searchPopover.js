@@ -1,14 +1,10 @@
 import React, { Fragment, useState } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
-import PropTypes from "prop-types";
 import classes from "./searchPopover.module.scss";
 import uniqid from "uniqid";
 import arrayFilter from "../../../Utility/arrayFilter";
 import { connect } from "react-redux";
 import {
   Typography,
-  Avatar,
-  ListItemAvatar,
   ListItemText,
   List,
   ListItem,
@@ -16,29 +12,47 @@ import {
 } from "@material-ui/core";
 
 const users = [
-  { name: "Kevin Wolfrom" },
+  { name: "Kevin Wolfrom", email: "kevin@kevin.com" },
+  { name: "Bill B." },
+  { name: "John G" },
+  { name: "Mike M." },
+  { name: "Bill B." },
+  { name: "John G" },
+  { name: "Mike M." },
+  { name: "Bill B." },
+  { name: "John G" },
+  { name: "Mike M." },
+  { name: "Bill B." },
+  { name: "John G" },
+  { name: "Mike M." },
   { name: "Bill B." },
   { name: "John G" },
   { name: "Mike M." },
 ];
 
 function SearchModal(props) {
-  let searchResults;
-  const [userSearch, setUserSearch] = useState(props.userSearch);
+  let userData = props.search
+    ? arrayFilter(props.users, props.userSearch)
+    : null;
 
-  if (users.length > 0) {
-    searchResults = users.map((user) => {
-      return (
-        <Fragment key={uniqid()}>
-          <ListItem key={user.name} button>
-            <ListItemText id={user.name} primary={`${user.name}`} />
-          </ListItem>
-          <Divider variant="middle" />
-        </Fragment>
-      );
-    });
-  } else {
-    searchResults = (
+  function selectUser(user) {
+    props.clearSearch();
+    props.addUser(user);
+  }
+
+  let searchResults =
+    users.length > 0 ? (
+      users.map((user) => {
+        return (
+          <Fragment key={uniqid()}>
+            <ListItem key={user.name} button onClick={() => selectUser(user)}>
+              <ListItemText id={user.name} primary={`${user.name}`} />
+            </ListItem>
+            <Divider variant="middle" />
+          </Fragment>
+        );
+      })
+    ) : (
       <Fragment>
         <Typography className={classes.Typography}>
           {" "}
@@ -46,7 +60,6 @@ function SearchModal(props) {
         </Typography>
       </Fragment>
     );
-  }
 
   return (
     <div className={classes.searchContainer}>
