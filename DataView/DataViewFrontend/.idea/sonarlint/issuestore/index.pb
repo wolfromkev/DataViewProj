@@ -99,3 +99,7 @@ o
 ?src/Components/UserView/CalendarModals/DataModalSwitch/Event.js,b/5/b54ec26547cad1f162b2d29dd4eb96f89b38e850
 s
 Csrc/Components/UserView/CalendarModals/DataModalSwitch/DateModal.js,2/e/2efb49069798aecdfd912a3bbf3cc4b83f33f604
+S
+#src/Components/UserView/ToDoList.js,c/4/c427f671e10f84cf6ef2ea2a88c413f5bd8805a0
+S
+#src/Components/UserView/UserInfo.js,7/8/787b27f06ac5d8307cee78138ef17d1e95424fae

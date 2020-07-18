@@ -1,9 +1,9 @@
 
+Ljavascript:S1128"+Remove this unused import of 'ModalFooter'.(Ìšì˜üÿÿÿÿ
+Ljavascript:S1128"+Remove this unused import of 'ModalHeader'.(Ìšì˜üÿÿÿÿ
+Xjavascript:S1854"7Remove this useless assignment to variable "eventData".(»ûí÷þÿÿÿÿ
+[javascript:S1481":Remove the declaration of the unused 'eventData' variable.(»ûí÷þÿÿÿÿ
 Gjavascript:S1128"&Remove this unused import of 'Button'.(Ìšì˜üÿÿÿÿ
 ^javascript:S1481"=Remove the declaration of the unused 'setEventData' variable.(»ûí÷þÿÿÿÿ
-[javascript:S1854":Remove this useless assignment to variable "setEventData".(»ûí÷þÿÿÿÿ
-[javascript:S1481":Remove the declaration of the unused 'eventData' variable.(»ûí÷þÿÿÿÿ
-Ljavascript:S1128"+Remove this unused import of 'ModalHeader'.(Ìšì˜üÿÿÿÿ
 Jjavascript:S1128")Remove this unused import of 'ModalBody'.(Ìšì˜üÿÿÿÿ
-Xjavascript:S1854"7Remove this useless assignment to variable "eventData".(»ûí÷þÿÿÿÿ
-Ljavascript:S1128"+Remove this unused import of 'ModalFooter'.(Ìšì˜üÿÿÿÿ
+[javascript:S1854":Remove this useless assignment to variable "setEventData".(»ûí÷þÿÿÿÿ

@@ -2,111 +2,152 @@ import React, { useState } from "react";
 import { Button, ModalFooter, Tooltip } from "reactstrap";
 import classes from "./EventModal.module.scss";
 import CreateIcon from "@material-ui/icons/Create";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 import Cleave from "cleave.js/react";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 let describe = "The desc of the task is .oasdinfgoaefniaiewf";
-let ECD = "The desc of the task is .oasdinfgoaefniaiewf";
+let ECD = "2020-07-15 12:00am";
 
 function EventModal(props) {
   const [eventTask, setEventTask] = useState(true);
 
+  const [DescTemp, setDescTemp] = useState();
   const [descEdit, setDescEdit] = useState(false);
   const [newDesc, setNewDesc] = useState(describe);
-  const [descEditTooltip, setDescEditTooltip] = useState(false);
 
+  const [ecdTemp, setEcdTemp] = useState();
   const [ecdEdit, setEcdEdit] = useState(false);
-  const [newECD, setNewECD] = useState(describe);
-  const [ecdEditTooltip, setEcdEditTooltip] = useState(false);
+  const [newECD, setNewECD] = useState(ECD);
 
   const [creator, setCreator] = useState(true);
 
-  const editDescToggle = () => setDescEditTooltip(!descEditTooltip);
-  const editECDToggle = () => setEcdEdit(!ecdEdit);
+  const formik = useFormik({
+    initialValues: {
+      description: "",
+      ecd: "",
+    },
+    validationSchema: yup.object().shape({
+      description: yup.string().required(),
+      ecd: yup.string().min(16).required(),
+    }),
+
+    onSubmit: () => {
+      console.log(formik.values);
+      props.toggleDate();
+    },
+  });
+
+  const saveECDChange = () => {
+    setNewECD(ecdTemp);
+    setEcdEdit(!ecdEdit);
+  };
+
+  const saveDescChange = () => {
+    setNewDesc(DescTemp);
+    setDescEdit(!descEdit);
+  };
 
   return (
     <>
-      {" "}
       <div className={classes.header}>
-        {" "}
         {eventTask ? "Event Title" : "Task Title"}
       </div>{" "}
       {eventTask ? (
         <>
-          <div className={classes.timeValues}>
-            <p>Start Time: 2020-07-15 12:00am </p>{" "}
-            <p>End Time: 2020-07-15 12:00am </p>
+          <div className={classes.Description}>
+            <div className={classes.taskValues}>
+              <h3>Start Time: </h3> 2020-07-15 12:00am
+            </div>
           </div>
           <div className={classes.Description}>
-            <h3>Description: </h3>{" "}
-            asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
+            <div className={classes.taskValues}>
+              <h3>End Time: </h3> 2020-07-15 12:00am
+            </div>
           </div>
           <div className={classes.Description}>
-            <h3>Invitees: </h3>{" "}
-            asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
+            <div className={classes.taskValues}>
+              <h3>Description: </h3> asdasdasdasdasdas
+            </div>
+          </div>
+          <div className={classes.Description}>
+            <div className={classes.taskValues}>
+              <h3>Invitees: </h3> asdasdasdasdasdas
+            </div>
           </div>{" "}
         </>
       ) : (
         <>
-          <div className={classes.timeValues}>
-            <p>
-              ECD: 2020-07-15 12:00am{" "}
-              <Cleave
-                className={classes.cleave1}
-                placeholder="Start"
-                options={{
-                  blocks: [4, 2, 2, 2, 2],
-                  delimiters: ["/", "/", " ", ":"],
-                  numericOnly: true,
-                }}
-              />
+          <div className={classes.assinged}>Assigned By: Kevin Wolfrom</div>
+          <div className={classes.Description}>
+            <div>
+              <h3>ECD: </h3>
               {creator ? (
-                <CreateIcon
-                  className={classes.pencilIcon}
-                  id="pencilIcon"
-                  onClick={() => setNewECD(!newECD)}
-                />
+                ecdEdit ? (
+                  <div className={classes.ecdEditToggle}>
+                    <ClearIcon onClick={() => setEcdEdit(!ecdEdit)} />{" "}
+                    <CheckIcon onClick={() => saveECDChange()} />
+                  </div>
+                ) : (
+                  <>
+                    <CreateIcon
+                      className={classes.ecdEditToggle}
+                      onClick={() => setEcdEdit(!ecdEdit)}
+                    />
+                  </>
+                )
               ) : null}
-              <Tooltip
-                placement="right"
-                isOpen={ecdEditTooltip}
-                target="pencilIcon"
-                toggle={editECDToggle}
-              >
-                {descEdit ? "Cancel Edit" : "Click to edit"}
-              </Tooltip>
-            </p>
-            <p>Assigned By: Kevin Wolfrom</p>
+              {ecdEdit ? (
+                <Cleave
+                  name="ecd"
+                  {...formik.getFieldProps("ecd")}
+                  className={classes.ecdTextArea}
+                  placeholder={newECD}
+                  onChange={(event) => setEcdTemp(event.target.value)}
+                  options={{
+                    blocks: [4, 2, 2, 2, 2],
+                    delimiters: ["/", "/", " ", ":"],
+                    numericOnly: true,
+                  }}
+                />
+              ) : (
+                <div className={classes.taskValues}> {newECD} </div>
+              )}
+            </div>
           </div>
           <div className={classes.Description}>
-            <h3>
-              Description:{" "}
+            <div>
+              <h3>Description: </h3>
               {creator ? (
-                <CreateIcon
-                  className={classes.pencilIcon}
-                  id="pencilIcon"
-                  onClick={() => setDescEdit(!descEdit)}
-                />
+                descEdit ? (
+                  <div className={classes.descEditToggle}>
+                    <ClearIcon onClick={() => setDescEdit(!descEdit)} />
+                    <CheckIcon onClick={() => saveDescChange()} />
+                  </div>
+                ) : (
+                  <>
+                    <CreateIcon
+                      className={classes.descEditToggle}
+                      onClick={() => setDescEdit(!descEdit)}
+                    />
+                  </>
+                )
               ) : null}
-              <Tooltip
-                placement="right"
-                isOpen={descEditTooltip}
-                target="pencilIcon"
-                toggle={editDescToggle}
-              >
-                {descEdit ? "Cancel Edit" : "Click to edit"}
-              </Tooltip>
-            </h3>
+            </div>
             {descEdit ? (
               <textarea
-                rows="2"
+                name="description"
+                {...formik.getFieldProps("description")}
+                placeholder={newDesc}
+                rows="1"
                 cols="50"
                 className={classes.descriptionTextArea}
-                onChange={(event) => setNewDesc(event.target.value)}
-              >
-                {describe}
-              </textarea>
+                onChange={(event) => setDescTemp(event.target.value)}
+              />
             ) : (
-              <p> {describe}</p>
+              <div className={classes.taskValues}> {newDesc}</div>
             )}
           </div>
         </>
@@ -114,11 +155,11 @@ function EventModal(props) {
       <ModalFooter className={classes.footer}>
         <Button color="primary" onClick={() => setEventTask(!eventTask)}>
           Mark Complete
-        </Button>{" "}
+        </Button>
         <Button color="secondary" onClick={props.toggleEvent}>
           Cancel
         </Button>
-      </ModalFooter>{" "}
+      </ModalFooter>
     </>
   );
 }

@@ -9,7 +9,6 @@
   word-wrap: break-word;
   margin: 1rem;
   border: none;
-  border-bottom: 1px solid #00b8d2;
 }
 
 .footer {
@@ -21,15 +20,38 @@
   flex-direction: column;
   margin-left: 1rem;
 }
-.pencilIcon {
+.ecdEditToggle,
+.descEditToggle {
+  position: absolute;
   cursor: pointer;
+  right: 1rem;
 }
-.descriptionTextArea {
+
+.descEditToggle {
+  top: 15.3rem;
+}
+
+.ecdEditToggle {
+  top: 9rem;
+}
+
+.descriptionTextArea,
+.ecdTextArea {
   color: #ffffff;
-  width: 90%;
-  margin: 1rem 0 1rem 1rem;
+  width: 100%;
   font-size: 16px;
   border: none;
+  border-bottom: 1px solid #00d21c;
   outline: none;
   background: transparent;
+}
+
+.assinged {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.taskValues {
+  border-bottom: 1px solid #00b8d2;
 }
