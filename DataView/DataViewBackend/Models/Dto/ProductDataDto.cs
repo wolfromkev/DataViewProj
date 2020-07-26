@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DataViewBackend.Models.Dto
-
 {
     public class ProductDataDto
     {

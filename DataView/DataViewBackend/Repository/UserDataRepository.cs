@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -15,14 +16,12 @@ namespace DataViewBackend.Repository
     {
         private readonly ApplicationDbContext _db;
         private readonly AppSettings _appSettings;
-
+        
         public UserDataRepository(ApplicationDbContext db, IOptions<AppSettings> appsettings)
         {
             _appSettings = appsettings.Value;
             _db = db;
-
         }
-        
         public bool IsUniqueUser(string emailAddress)
         {
             var user = _db.UserData.SingleOrDefault(x => x.Email == emailAddress);
@@ -30,10 +29,8 @@ namespace DataViewBackend.Repository
             {
                 return true; //User ID is unique if user is null.
             }
-
             return false; //User ID would already exist in this case.
         }
-
         public UserData Authenticate(string emailAddress, string password)
         {
             var user = _db.UserData.SingleOrDefault(x => x.Email == emailAddress && x.Password == password);
@@ -56,7 +53,6 @@ namespace DataViewBackend.Repository
             user.Token = tokenHandler.WriteToken(token);
             return user;
         }
-
         public UserData Register(string emailAddress, string password, string firstName, string lastName)
         {
             UserData userObj = new UserData()
@@ -83,9 +79,22 @@ namespace DataViewBackend.Repository
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
-            
-            
             return user;
+        }
+        
+        public ICollection<UserData> GetAllUserData()
+        {
+            return _db.UserData.OrderBy(a => a.LastName).ToList();
+        }
+
+        public ICollection<UserData> SearchUserData(string query)
+        {
+            return _db.UserData.Where(a => a.FullName.Contains(query)).ToList();
+        }
+
+        public UserData GetUserData(int userId)
+        {
+            return _db.UserData.FirstOrDefault(a => a.Id == userId);
         }
     }
 }

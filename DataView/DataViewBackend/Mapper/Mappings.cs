@@ -8,12 +8,12 @@ namespace DataViewBackend.Mapper
     {
         public Mappings()
         {
-            CreateMap<ProductCommentData, ProductCommentDataDto>().ReverseMap();
-            CreateMap<ToolData, ToolDataDto>().ReverseMap();
             CreateMap<UpcomingProductData, UpcomingProductDataDto>().ReverseMap();
             CreateMap<WeeklyYieldData, WeeklyYieldDataDto>().ReverseMap();
-            CreateMap<UserData, UserDataDto>().ReverseMap();
             CreateMap<ProductData, ProductDataDto>().ReverseMap();
+            CreateMap<UserData, UserDataDto>().ReverseMap();
+            CreateMap<EventTask, EventTaskDto>().ReverseMap();
+            CreateMap<ToolDowntime, ToolDowntimeDto>().ReverseMap();
         }
     }
 }

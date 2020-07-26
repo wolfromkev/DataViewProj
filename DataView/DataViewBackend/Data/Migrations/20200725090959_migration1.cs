@@ -1,12 +1,30 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataViewBackend.Migrations
 {
-    public partial class AddProductDataToDB : Migration
+    public partial class migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "EventTask",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AssignerId = table.Column<int>(type: "int", nullable: false),
+                    AssignerName = table.Column<int>(type: "int", nullable: false),
+                    AssigneeId = table.Column<int>(type: "int", nullable: false),
+                    AssigneeName = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Start = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    End = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventTask", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "ProductData",
                 columns: table => new
@@ -58,6 +76,24 @@ namespace DataViewBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ToolDowntime",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AssignerId = table.Column<int>(type: "int", nullable: false),
+                    AssignerName = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Start = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    End = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tool = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToolDowntime", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UpcomingProductData",
                 columns: table => new
                 {
@@ -76,10 +112,10 @@ namespace DataViewBackend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tool = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,93 +140,27 @@ namespace DataViewBackend.Migrations
                 {
                     table.PrimaryKey("PK_WeeklyYieldData", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "ProductCommentData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCommentData", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductCommentData_ProductData_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "ProductData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductCommentData_UserData_UserId",
-                        column: x => x.UserId,
-                        principalTable: "UserData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ToolData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ToolName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DtStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DtEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToolData", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ToolData_UserData_UserId",
-                        column: x => x.UserId,
-                        principalTable: "UserData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCommentData_ProductId",
-                table: "ProductCommentData",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCommentData_UserId",
-                table: "ProductCommentData",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ToolData_UserId",
-                table: "ToolData",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductCommentData");
-
-            migrationBuilder.DropTable(
-                name: "ToolData");
-
-            migrationBuilder.DropTable(
-                name: "UpcomingProductData");
-
-            migrationBuilder.DropTable(
-                name: "WeeklyYieldData");
+                name: "EventTask");
 
             migrationBuilder.DropTable(
                 name: "ProductData");
 
             migrationBuilder.DropTable(
+                name: "ToolDowntime");
+
+            migrationBuilder.DropTable(
+                name: "UpcomingProductData");
+
+            migrationBuilder.DropTable(
                 name: "UserData");
+
+            migrationBuilder.DropTable(
+                name: "WeeklyYieldData");
         }
     }
 }

@@ -30,11 +30,11 @@ namespace DataViewBackend
         {
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IProductDataRepository, ProductDataRepository>(); 
-            services.AddScoped<IToolDataRepository, ToolDataRepository>(); 
+            services.AddScoped<IProductDataRepository, ProductDataRepository>();
+            services.AddScoped<IEventTaskRepository, EventTaskRepository>();
             services.AddScoped<IUserDataRepository, UserDataRepository>(); 
-            services.AddScoped<IGetOnlyDataRepository, GetOnlyRepositoryData>(); 
-            services.AddScoped<IProductCommentDataRepository, ProductCommentDataRepository>(); 
+            services.AddScoped<IGetOnlyDataRepository, GetOnlyRepositoryData>();
+            services.AddScoped<IToolDowntimeRepository, ToolDowntimeRepository>();
             services.AddAutoMapper(typeof(Mappings));
             services.AddSwaggerGen(options =>
             {
