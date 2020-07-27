@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AutoMapper;
 using DataViewBackend.Models.Dto;
+using DataViewBackend.Models.Dto.UserDto;
 using DataViewBackend.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 

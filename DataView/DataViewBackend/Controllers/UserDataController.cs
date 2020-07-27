@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using AutoMapper;
 using DataViewBackend.Models;
+using DataViewBackend.Models.Dto.UserDto;
 using DataViewBackend.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +15,15 @@ namespace DataViewBackend.Controllers
     public class UserDataController : Controller
     {
         private readonly IUserDataRepository _userRepo;
+        private readonly IMapper _mapper;
 
-        public UserDataController(IUserDataRepository userRepo)
+        public UserDataController(IUserDataRepository userRepo, IMapper mapper)
         {
             _userRepo = userRepo;
+            _mapper = mapper;
+            
         }
-        [AllowAnonymous] //Overrides Authorize
+        [AllowAnonymous] 
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] UserData model)
         {
@@ -47,6 +53,41 @@ namespace DataViewBackend.Controllers
             }
 
             return Ok(user);
+        }
+        
+        [AllowAnonymous] 
+        [HttpGet("[action]/{query}")]
+        public IActionResult SearchUserData(string query)
+        {
+            var objDto = new List<UserDataDto>();
+            var userList = _userRepo.SearchUserData(query);
+            foreach (var obj in userList)
+            {
+                objDto.Add( _mapper.Map<UserDataDto>(obj));
+            }
+            return Ok(objDto);
+        }
+        [AllowAnonymous] 
+        [HttpPatch("[action]")]
+        public IActionResult UpdateUserData([FromBody] UpdateUserDataDto userData)
+        {
+            if (!_userRepo.UpdateUserData(userData))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating your information");
+                return StatusCode(500, ModelState);
+            }
+            return Ok(userData);
+        }
+        [AllowAnonymous] 
+        [HttpPatch("[action]")]
+        public IActionResult UpdateUserImage([FromBody] UpdateUserImageDto userData)
+        {
+            if (!_userRepo.UpdateUserImage(userData))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating your image");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
         }
     }
 }

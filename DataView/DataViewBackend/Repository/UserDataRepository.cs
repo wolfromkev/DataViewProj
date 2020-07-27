@@ -4,8 +4,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using DataViewBackend.Data;
 using DataViewBackend.Models;
+using DataViewBackend.Models.Dto;
+using DataViewBackend.Models.Dto.UserDto;
 using DataViewBackend.Repository.IRepository;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -16,9 +19,11 @@ namespace DataViewBackend.Repository
     {
         private readonly ApplicationDbContext _db;
         private readonly AppSettings _appSettings;
+        private readonly IMapper _mapper;
         
-        public UserDataRepository(ApplicationDbContext db, IOptions<AppSettings> appsettings)
+        public UserDataRepository(ApplicationDbContext db, IOptions<AppSettings> appsettings, IMapper mapper)
         {
+            _mapper = mapper;
             _appSettings = appsettings.Value;
             _db = db;
         }
@@ -89,12 +94,34 @@ namespace DataViewBackend.Repository
 
         public ICollection<UserData> SearchUserData(string query)
         {
-            return _db.UserData.Where(a => a.FullName.Contains(query)).ToList();
+            return _db.UserData.Where(a => a.FirstName.Contains(query) || a.LastName.Contains(query)).ToList();
         }
 
         public UserData GetUserData(int userId)
         {
             return _db.UserData.FirstOrDefault(a => a.Id == userId);
+        }
+
+        public bool UpdateUserData(UpdateUserDataDto userData)
+        {
+            var returnObj = GetUserData(userData.Id);
+            returnObj.Role = userData.Role;
+            returnObj.UserDescription = userData.UserDescription;
+            _db.UserData.Update(returnObj);
+            return Save();
+        }
+
+        public bool UpdateUserImage(UpdateUserImageDto userData)
+        {
+            var returnObj = GetUserData(userData.Id);
+            returnObj.Image = userData.Image;
+            _db.UserData.Update(returnObj);
+            return Save();
+        }
+        
+        public bool Save()
+        {
+            return _db.SaveChanges() >= 0 ? true : false;
         }
     }
 }

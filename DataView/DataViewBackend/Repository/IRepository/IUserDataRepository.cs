@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using DataViewBackend.Models;
+using DataViewBackend.Models.Dto;
+using DataViewBackend.Models.Dto.UserDto;
 
 namespace DataViewBackend.Repository.IRepository
 {
@@ -11,5 +13,8 @@ namespace DataViewBackend.Repository.IRepository
         ICollection<UserData> GetAllUserData();
         ICollection<UserData> SearchUserData(string query);
         UserData GetUserData(int userId);
+        
+        bool UpdateUserData(UpdateUserDataDto userData);
+        bool UpdateUserImage(UpdateUserImageDto userData);
     }
 } 

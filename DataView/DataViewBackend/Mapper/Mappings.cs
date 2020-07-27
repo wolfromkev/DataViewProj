@@ -1,6 +1,9 @@
 using AutoMapper;
 using DataViewBackend.Models;
 using DataViewBackend.Models.Dto;
+using DataViewBackend.Models.Dto.EventDto;
+using DataViewBackend.Models.Dto.TaskDTOs;
+using DataViewBackend.Models.Dto.UserDto;
 
 namespace DataViewBackend.Mapper
 {
@@ -11,9 +14,16 @@ namespace DataViewBackend.Mapper
             CreateMap<UpcomingProductData, UpcomingProductDataDto>().ReverseMap();
             CreateMap<WeeklyYieldData, WeeklyYieldDataDto>().ReverseMap();
             CreateMap<ProductData, ProductDataDto>().ReverseMap();
+            
             CreateMap<UserData, UserDataDto>().ReverseMap();
-            CreateMap<EventTask, EventTaskDto>().ReverseMap();
-            CreateMap<ToolDowntime, ToolDowntimeDto>().ReverseMap();
+            
+            CreateMap<Task, TaskDto>().ReverseMap();
+            CreateMap<Task, UpdateTaskDto>().ReverseMap();
+            CreateMap<Task, DeleteTaskDto>().ReverseMap();
+            
+            CreateMap<Event, EventDto>().ReverseMap();
+            CreateMap<Event, CreateEventDto>().ReverseMap();
+            CreateMap<Event, UpdateEventDto>().ReverseMap();
         }
     }
 }

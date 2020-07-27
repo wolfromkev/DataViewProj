@@ -13,3 +13,16 @@ export const SET_UNAUTHENTICATED = "SET_UNAUTHENTICATED";
 export const LOADING_USER = "LOADING_USER";
 export const SET_ERRORS = "SET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+//EventTask reducer
+export const SET_TASKS = "SET_TASKS";
+export const ADD_CREATED_TASKS = "ADD_CREATED_TASKS";
+export const FETCH_DATA = "FETCH_DATA";
+export const CREATE_TASKS = "CREATE_TASKS";
+export const UPDATE_TASK = "UPDATE_TASK";
+export const DELETE_TASK = "DELETE_TASK";
+
+export const GET_EVENTS = "SET_ERRORS";
+export const CREATE_EVENT = "CLEAR_ERRORS";
+export const UPDATE_EVENT = "CLEAR_ERRORS";
+export const DELETE_EVENT = "CLEAR_ERRORS";

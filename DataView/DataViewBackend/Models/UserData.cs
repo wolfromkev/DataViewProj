@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using DataViewBackend.Models.JoinTables;
 
 namespace DataViewBackend.Models
 {
@@ -16,11 +15,24 @@ namespace DataViewBackend.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         
+        public string Role { get; set; }
+        
+        public string UserDescription { get; set; }
+        
+        public byte[] Image { get; set; }
+        
+        public DateTime CreatedAt { get; set; }
+        
+        public ICollection<EventUsers> Events { get; set; }
+        
+        
+        [NotMapped]
         public string FullName {
             get
             {
                 return $"{FirstName} {LastName}";
             }
+            
         }
 
         [NotMapped]

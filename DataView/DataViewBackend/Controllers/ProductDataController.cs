@@ -31,7 +31,7 @@ namespace DataViewBackend.Controllers
             return Ok(objDto);
         }
         
-        [HttpGet("{productDataId:int}", Name="GetProductData")] //Specifies this get req will take an argument. The Name part allows you to call the route in VS
+        [HttpGet("{productDataId:int}", Name="GetProductData")]
         public IActionResult GetProductData(int productDataId)
         {
             var obj = _pdRepo.GetProductData(productDataId);

@@ -8,6 +8,7 @@ import storage from "redux-persist/lib/storage";
 import productDataReducer from "./reducers/productDataReducer";
 import miscDataReducer from "./reducers/miscDataReducer";
 import userDataReducer from "./reducers/userDataReducer";
+import TaskReducer from "./reducers/TaskReducer";
 
 const persistConfig = {
   key: "root",
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   miscData: miscDataReducer,
   productData: productDataReducer,
   userData: userDataReducer,
+  Tasks: TaskReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -1,4 +1,4 @@
-namespace DataViewBackend.Models.Dto
+namespace DataViewBackend.Models.Dto.UserDto
 {
     public class UserDataDto
     {

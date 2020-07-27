@@ -1,11 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace DataViewBackend.Models.Dto
 {
     public class ProductDataDto
     {
-        [Key]
+      
         public int Id { get; set; }
         public string StartTime { get; set; }
         public string FinishTime { get; set; }

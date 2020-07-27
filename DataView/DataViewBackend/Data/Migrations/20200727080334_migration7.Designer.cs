@@ -4,14 +4,16 @@ using DataViewBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataViewBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200727080334_migration7")]
+    partial class migration7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,6 +72,26 @@ namespace DataViewBackend.Migrations
                     b.HasIndex("UserDataId");
 
                     b.ToTable("EventUsers");
+                });
+
+            modelBuilder.Entity("DataViewBackend.Models.JoinTables.UserTasks", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserDataId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "TaskId");
+
+                    b.HasIndex("TaskId");
+
+                    b.HasIndex("UserDataId");
+
+                    b.ToTable("UserTasks");
                 });
 
             modelBuilder.Entity("DataViewBackend.Models.ProductData", b =>
@@ -331,6 +353,19 @@ namespace DataViewBackend.Migrations
 
                     b.HasOne("DataViewBackend.Models.UserData", "UserData")
                         .WithMany("Events")
+                        .HasForeignKey("UserDataId");
+                });
+
+            modelBuilder.Entity("DataViewBackend.Models.JoinTables.UserTasks", b =>
+                {
+                    b.HasOne("DataViewBackend.Models.Task", "Task")
+                        .WithMany("Invitees")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataViewBackend.Models.UserData", "UserData")
+                        .WithMany("Tasks")
                         .HasForeignKey("UserDataId");
                 });
 #pragma warning restore 612, 618
