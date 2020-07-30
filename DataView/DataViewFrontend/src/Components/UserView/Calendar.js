@@ -1,30 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dateClick from "@fullcalendar/interaction";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import classes from "./Calendar.module.scss";
-import DateModal from "./CalendarModals/DataModalSwitch/DateModal";
-import EventModal from "./CalendarModals/EventModal";
+import momentPlugin from "@fullcalendar/moment";
 
 function CalendarComp(props) {
-  const [eventData, setEventData] = useState(false);
-  const [dateModal, setDateModal] = useState(false);
-  const [eventModal, setEventModal] = useState(false);
+  const [eventData, setEventData] = useState([]);
 
   const toggleDate = (info) => {
-    setDateModal(!dateModal);
+    props.toggleDate();
   };
   const toggleEvent = (info) => {
-    setEventModal(!eventModal);
+    props.toggleEvent();
   };
+
+  useEffect(() => {
+    let tempTasks = [];
+    for (let i = 0; i < props.tasks.assignedTasks.length; i++) {
+      tempTasks.push({
+        id: props.tasks.assignedTasks[i].id,
+        title: props.tasks.assignedTasks[i].title,
+        description: props.tasks.assignedTasks[i].description,
+        date: props.tasks.assignedTasks[i].end,
+        color: "red",
+      });
+    }
+
+    for (let i = 0; i < props.tasks.outgoingTasks.length; i++) {
+      tempTasks.push({
+        id: props.tasks.outgoingTasks[i].id,
+        title: props.tasks.outgoingTasks[i].title,
+        description: props.tasks.outgoingTasks[i].description,
+        date: props.tasks.outgoingTasks[i].end,
+        color: "yellow",
+      });
+    }
+    for (let i = 0; i < props.tasks.personalTasks.length; i++) {
+      tempTasks.push({
+        id: props.tasks.personalTasks[i].id,
+        title: props.tasks.personalTasks[i].title,
+        description: props.tasks.personalTasks[i].description,
+        date: props.tasks.personalTasks[i].end,
+        color: "green",
+      });
+    }
+    for (let i = 0; i < props.eventData.length; i++) {
+      tempTasks.push({
+        id: props.eventData[i].id,
+        title: props.eventData[i].title,
+        description: props.eventData[i].description,
+        start: props.eventData[i].start,
+        end: props.eventData[i].end,
+        color: "blue",
+      });
+    }
+    let inputArray = [...eventData].concat(tempTasks);
+    setEventData(inputArray);
+  }, [props.eventData]);
 
   return (
     <div className={classes.calendarInnerContainer}>
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, dateClick]}
+        plugins={[dayGridPlugin, timeGridPlugin, dateClick, momentPlugin]}
         headerToolbar={{
           left: "dayGridMonth,timeGridWeek,timeGridDay",
           center: "title",
@@ -39,41 +79,14 @@ function CalendarComp(props) {
         }}
         initialView="dayGridMonth"
         dateClick={(info) => toggleDate(info)}
-        events={[
-          {
-            title: "Personal Task",
-            date: "2020-07-01",
-            description: "Lecture",
-            backgroundColor: "red",
-            editable: "true",
-          },
-          {
-            title: "calendar Event",
-            start: "2020-07-10",
-            end: "2020-07-15",
-            editable: "true",
-          },
-          {
-            title: "External Task",
-            date: "2020-07-20",
-            description: "Lecture",
-            backgroundColor: "green",
-            editable: "true",
-          },
-        ]}
+        events={eventData}
         eventClick={(info) => toggleEvent(info)}
       />
-      <Modal isOpen={dateModal} toggle={toggleDate} className={classes.Modal}>
-        <DateModal toggleDate={toggleDate} />
-      </Modal>
-      <Modal isOpen={eventModal} toggle={toggleEvent} className={classes.Modal}>
-        <EventModal toggleEvent={toggleEvent} />
-      </Modal>
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ eventData: state.events.eventData });
 
 const mapDispatchToProps = (dispatch) => ({});
 

@@ -217,6 +217,9 @@ namespace DataViewBackend.Migrations
                     b.Property<string>("AssignerName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

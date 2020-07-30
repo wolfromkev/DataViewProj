@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DataViewBackend.Models.JoinTables;
@@ -27,6 +28,8 @@ namespace DataViewBackend.Models
         
         [Required]
         public string End { get; set; }
+        [Required]
+        public bool Completed { get; set; }
         
         
     }

@@ -1,0 +1,69 @@
+.Container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.header {
+}
+
+.loader {
+  display: grid;
+  grid-template-areas:
+    "tl tm tr"
+    "ml mm mr"
+    "bl bm br";
+}
+.loader div {
+  margin: 1rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: #fff;
+  animation: loader 1.2s linear infinite;
+}
+.loader div:nth-child(1) {
+  grid-area: tl;
+  animation-delay: 0s;
+}
+.loader div:nth-child(2) {
+  grid-area: tm;
+  animation-delay: -0.4s;
+}
+.loader div:nth-child(3) {
+  grid-area: tr;
+  animation-delay: -0.8s;
+}
+.loader div:nth-child(4) {
+  grid-area: ml;
+  animation-delay: -0.4s;
+}
+.loader div:nth-child(5) {
+  grid-area: mm;
+  animation-delay: -0.8s;
+}
+.loader div:nth-child(6) {
+  grid-area: mr;
+  animation-delay: -1.2s;
+}
+.loader div:nth-child(7) {
+  grid-area: bl;
+  animation-delay: -0.8s;
+}
+.loader div:nth-child(8) {
+  grid-area: bm;
+  animation-delay: -1.2s;
+}
+.loader div:nth-child(9) {
+  grid-area: br;
+  animation-delay: -1.6s;
+}
+@keyframes loader {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

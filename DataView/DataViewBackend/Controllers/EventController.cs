@@ -38,7 +38,7 @@ namespace DataViewBackend.Controllers
             return Ok(objList);
         }
         
-        [HttpPatch("[action]{userId:int}")]
+        [HttpPatch("[action]/{userId:int}")]
         public IActionResult UpdateEvent(int userId, [FromBody] UpdateEventDto eventObj)
         {
             if (eventObj == null || userId!=eventObj.AssignerId)
@@ -53,6 +53,22 @@ namespace DataViewBackend.Controllers
                 return StatusCode(500, ModelState);
             }
             return Ok(eventObj);
+        }
+        
+        [HttpDelete("[action]/{eventId:int}+{userId:int}")]
+        public IActionResult DeleteEvent(int eventId, int userId)
+        {
+            if (!_evRepo.EventExists(eventId))
+            {
+                return NotFound();
+            }
+            
+            if (!_evRepo.DeleteEvent(eventId,userId))
+            {
+                ModelState.AddModelError("", $"Something went wrong when deleting the event");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
         }
     }
 }

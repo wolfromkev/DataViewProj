@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataViewBackend.Models.Dto.TaskDTOs;
@@ -48,23 +49,33 @@ namespace DataViewBackend.Controllers
                 ModelState.AddModelError("", $"Something went wrong when updating the task");
                 return StatusCode(500, ModelState);
             }
-            return Ok(task);
+            return NoContent();
         }
         
-        [HttpDelete("[action]{eventId:int}")]
+        [HttpPatch("[action]")]
+        public IActionResult CompleteTask([FromBody] IEnumerable<CompleteTaskDto>  tasks)
+        {
+            if (!_etRepo.CompleteTask(tasks))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the task");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        
+        [HttpDelete("[action]/{taskId:int}")]
         public IActionResult DeleteTask(int taskId)
         {
             if (!_etRepo.TaskExists(taskId))
             {
                 return NotFound();
             }
-            var taskObj = _etRepo.GetTask(taskId);
-            if (!_etRepo.DeleteTask(taskObj))
+            if (!_etRepo.DeleteTask(taskId))
             {
                 ModelState.AddModelError("", $"Something went wrong when deleting the task");
                 return StatusCode(500, ModelState);
             }
-            return Ok(taskId);
+            return NoContent();
         }
     }
 }

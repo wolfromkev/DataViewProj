@@ -20,10 +20,10 @@ namespace DataViewBackend.Models
         public string Description { get; set; }
         
         [Required]
-        public string Start { get; set; }
+        public string Start { get; set; } //smalldatetime
         
         [Required]
-        public string End { get; set; }
+        public string End { get; set; } //smalldatetime
         [JsonIgnore]
         public ICollection<EventUsers> Invitees { get; set; }
     }

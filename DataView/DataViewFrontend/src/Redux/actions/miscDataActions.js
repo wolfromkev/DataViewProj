@@ -2,6 +2,8 @@ import {
   LOADING_MISC_DATA,
   GET_WEEKLY_YIELD_DATA,
   GET_UPCOMING_PROD_DATA,
+  SEARCH_USERS,
+  SET_USERS,
 } from "../types";
 
 import axios from "axios";
@@ -31,6 +33,24 @@ export const getUpcomingProductData = () => (dispatch) => {
     .then((res) => {
       dispatch({
         type: GET_UPCOMING_PROD_DATA,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_UPCOMING_PROD_DATA,
+        payload: [],
+      });
+    });
+};
+
+export const searchUserData = (query) => (dispatch) => {
+  dispatch({ type: SEARCH_USERS });
+  axios
+    .get(`/UserData/searchUserData/${query}`)
+    .then((res) => {
+      dispatch({
+        type: SET_USERS,
         payload: res.data,
       });
     })

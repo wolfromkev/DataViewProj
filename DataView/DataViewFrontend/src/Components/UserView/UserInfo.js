@@ -18,6 +18,6 @@ const mapStateToProps = (state) => ({
   userInfo: state.userData.credentials,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);

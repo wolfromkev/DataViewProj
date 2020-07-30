@@ -9,6 +9,7 @@ import productDataReducer from "./reducers/productDataReducer";
 import miscDataReducer from "./reducers/miscDataReducer";
 import userDataReducer from "./reducers/userDataReducer";
 import TaskReducer from "./reducers/TaskReducer";
+import EventReducer from "./reducers/EventReducer";
 
 const persistConfig = {
   key: "root",
@@ -19,7 +20,8 @@ const reducers = combineReducers({
   miscData: miscDataReducer,
   productData: productDataReducer,
   userData: userDataReducer,
-  Tasks: TaskReducer,
+  tasks: TaskReducer,
+  events: EventReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

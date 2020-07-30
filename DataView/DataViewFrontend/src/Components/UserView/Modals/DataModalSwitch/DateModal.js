@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, ModalBody, ModalFooter } from "reactstrap";
+import { ModalBody } from "reactstrap";
 import classes from "./DataModal.module.scss";
 import Task from "./Task";
 import Event from "./Event";

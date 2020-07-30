@@ -2,34 +2,25 @@ import {
   SET_TASKS,
   FETCH_DATA,
   UPDATE_TASK,
-  ADD_CREATED_TASKS,
+  CREATE_TASKS,
   DELETE_TASK,
-  SET_ERRORS,
-  CLEAR_ERRORS,
+  SET_TASK_ERRORS,
+  CLEAR_TASK_ERRORS,
+  COMPLETE_TASK,
 } from "../types";
 
 const initialState = {
   loading: false,
-  assigneeTasks: [],
-  assignerTasks: [],
-  personalTasks: [],
+  tasks: [],
   errors: null,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_TASKS:
-      //filter tasks into assigned and assignee using two variables, seperate them into assignee and assigner.
-      //Also make one for self-tasks.
-
-      let setAssigneeTasks = action.payload;
-      let setAssignerTasks = action.payload;
-      let setPersonalTasks = action.payload;
       return {
         ...state,
-        assigneeTasks: state.assigneeTasks.concat(setAssigneeTasks),
-        assignerTasks: state.assignerTasks.concat(setAssignerTasks),
-        personalTasks: state.personalTasks.concat(setPersonalTasks),
+        tasks: action.payload,
         loading: false,
       };
 
@@ -40,40 +31,59 @@ export default function (state = initialState, action) {
       };
 
     case UPDATE_TASK:
-      //Return updated task on backend, replace the updated task w/ the response from server.
+      let updatedArray = state.tasks;
+      let tempIndex = updatedArray.indexOf(action.payload.id);
+      updatedArray[tempIndex].status = action.payload.status;
+      updatedArray[tempIndex].description = action.payload.description;
+      updatedArray[tempIndex].end = action.payload.end;
+
       return {
         ...state,
+        tasks: updatedArray,
+        loading: false,
       };
 
-    case ADD_CREATED_TASKS:
-      //Append new tasks to the list.
-      let addAssigneeTasks = action.payload;
-      let addAssignerTasks = action.payload;
-      let addPersonalTasks = action.payload;
+    case CREATE_TASKS:
       return {
         ...state,
-        assigneeTasks: [...state.assigneeTasks, addAssigneeTasks],
-        assignerTasks: [...state.assignerTasks, addAssignerTasks],
-        personalTasks: [...state.personalTasks, addPersonalTasks],
+        tasks: state.tasks.concat(action.payload),
         loading: false,
       };
 
     case DELETE_TASK:
-      //Upon succseful delete, respond w/ the event ID. Use that to filter out
+      let tempTasks = state.tasks.filter((a) => a.Id == action.payload);
       return {
         ...state,
+        tasks: tempTasks,
+        loading: false,
       };
 
-    case SET_ERRORS:
+    case SET_TASK_ERRORS:
       return {
         ...state,
         errors: action.payload,
+        loading: false,
       };
 
-    case CLEAR_ERRORS:
+    case CLEAR_TASK_ERRORS:
       return {
         ...state,
         errors: false,
+        loading: false,
+      };
+    case COMPLETE_TASK:
+      let updateArray = state.tasks[0];
+      let userId = state.tasks[1];
+      for (let i = 0; i < action.payload.length; i++) {
+        let tempIndex = updateArray.findIndex(
+          (a) => a.id == action.payload[i].taskId
+        );
+        updateArray[tempIndex].completed = action.payload[i].status;
+      }
+      return {
+        ...state,
+        tasks: [updateArray, userId],
+        loading: false,
       };
 
     default:

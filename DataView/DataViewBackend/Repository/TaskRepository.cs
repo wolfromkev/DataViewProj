@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataViewBackend.Data;
-using DataViewBackend.Models.Dto;
 using DataViewBackend.Models.Dto.TaskDTOs;
 using DataViewBackend.Repository.IRepository;
 using Task = DataViewBackend.Models.Task;
@@ -54,18 +53,31 @@ namespace DataViewBackend.Repository
         }
         public bool UpdateTask(UpdateTaskDto task) //Fix
         {
-            Task taskObj = GetTask(task.Id);
+            var taskObj = GetTask(task.Id);
             taskObj.Description = task.Description;
             taskObj.End = task.End;
             
             _db.Task.Update(taskObj);
             return Save();
         }
-        public bool DeleteTask(Task task) //Fix
+        public bool DeleteTask(int taskId) 
         {
-            _db.Task.Remove(task);
+            var taskObj = GetTask(taskId);
+            _db.Task.Remove(taskObj);
             return Save();
         }
+
+        public bool CompleteTask(IEnumerable<CompleteTaskDto> tasks)
+        {
+            foreach (var task in tasks)
+            {
+                var taskObj = GetTask(task.taskId);
+                taskObj.Completed = task.status;
+                _db.Task.Update(taskObj);
+            }
+            return Save();
+        }
+
         public Task GetTask(int taskId) //Fix
         {
             return _db.Task.FirstOrDefault(a => a.Id == taskId);

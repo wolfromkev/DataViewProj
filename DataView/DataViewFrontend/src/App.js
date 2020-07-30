@@ -11,6 +11,8 @@ import {
   getYieldData,
 } from "./Redux/actions/miscDataActions";
 import { logoutUser } from "./Redux/actions/userDataActions";
+import { GetEvents } from "./Redux/actions/EventActions";
+import { GetTasks } from "./Redux/actions/TaskActions";
 
 import NavbarComponent from "./Components/NavbarComponent";
 import Dashboard from "./Pages/Dashboard";
@@ -26,9 +28,6 @@ function App(props) {
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    props.getUpcomingProductData();
-    props.getAllProductData();
-    props.getYieldData();
     if (token) {
       const decodedToken = jwtDecode(token);
       if (decodedToken.exp * 1000 < Date.now()) {
@@ -40,7 +39,21 @@ function App(props) {
     }
   }, [token]);
 
-  useEffect(() => {}, []);
+  if (props.productData.length == 0 || !props.productData) {
+    props.getAllProductData();
+  }
+  if (props.yieldData.length == 0 || !props.yieldData) {
+    props.getYieldData();
+  }
+  if (props.upcomingProductData.length == 0 || !props.upcomingProductData) {
+    props.getUpcomingProductData();
+  }
+  if (props.taskData.length == 0 || !props.taskData) {
+    props.GetTasks(props.userData.id);
+  }
+  if (props.eventData.length == 0 || !props.eventData) {
+    props.GetEvents(props.userData.id);
+  }
 
   return (
     <BrowserRouter>
@@ -49,7 +62,7 @@ function App(props) {
       ) : (
         <>
           {" "}
-          <NavbarComponent />
+          <NavbarComponent persitor={props.persitorProp} />
           <Switch>
             <div className={classes.container}>
               <Route exact path="/dashboard" component={Dashboard} />
@@ -65,6 +78,12 @@ function App(props) {
 
 const mapStateToProps = (state) => ({
   authenticated: state.userData.authenticated,
+  userData: state.userData.credentials,
+  productData: state.productData.productData,
+  yieldData: state.miscData.yieldData,
+  upcomingProductData: state.miscData.upcomingProductData,
+  taskData: state.tasks.tasks,
+  eventData: state.events.eventData,
 });
 
 const mapDispatchToProps = {
@@ -72,6 +91,8 @@ const mapDispatchToProps = {
   getYieldData,
   getAllProductData,
   logoutUser,
+  GetEvents,
+  GetTasks,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

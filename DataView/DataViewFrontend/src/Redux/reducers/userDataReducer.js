@@ -5,12 +5,17 @@ import {
   LOADING_USER,
   SET_ERRORS,
   CLEAR_ERRORS,
+  SET_USER_INFORMATION,
+  SET_USER_IMAGE,
 } from "../types";
 
 const initialState = {
   authenticated: false,
   credentials: {},
   loading: false,
+  image: null,
+  role: null,
+  description: null,
   errors: null,
 };
 
@@ -34,6 +39,7 @@ export default function (state = initialState, action) {
       };
 
     case SET_USER:
+      console.log(action.payload);
       return {
         ...state,
         authenticated: true,
@@ -45,6 +51,17 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errors: action.payload,
+      };
+    case SET_USER_IMAGE:
+      return {
+        ...state,
+        image: action.payload.Image,
+      };
+    case SET_USER_INFORMATION:
+      return {
+        ...state,
+        description: action.payload.UserDescription,
+        role: action.payload.Role,
       };
 
     case CLEAR_ERRORS:

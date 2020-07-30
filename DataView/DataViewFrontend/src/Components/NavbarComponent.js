@@ -8,6 +8,12 @@ import { connect } from "react-redux";
 
 function NavbarComponent(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(false);
+
+  const logoutHandler = () => {
+    props.logoutUser();
+    props.persitor.purge();
+  };
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -34,7 +40,7 @@ function NavbarComponent(props) {
           <Link to="/profile"> Profile </Link>
         </span>
         <span className={classes.logout}>
-          <div onClick={() => props.logoutUser()}>Logout</div>
+          <div onClick={logoutHandler}>Logout</div>
         </span>
       </Navbar>
     </div>

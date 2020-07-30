@@ -14,6 +14,7 @@ namespace DataViewBackend.Repository.IRepository
         
         bool CreateTasks(TaskDto tasks);
         bool UpdateTask(UpdateTaskDto task);
-        bool DeleteTask(Task task);
+        bool DeleteTask(int taskId);
+        bool CompleteTask(IEnumerable<CompleteTaskDto> tasks);
     }
 }

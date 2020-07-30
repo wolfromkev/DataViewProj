@@ -1,0 +1,28 @@
+.root {
+  background-color: #3e3e3e;
+  border-radius: 4px;
+  margin: 0 0.5rem !important;
+  overflow: auto;
+  max-height: 80%;
+}
+.taskContainer {
+  width: 100%;
+  max-height: 25rem;
+}
+.title {
+  text-align: center;
+}
+.titleText {
+  display: flex;
+}
+.descText {
+}
+.extraContainer {
+  display: flex;
+  & .div {
+    flex: 1;
+  }
+}
+.compText {
+  text-decoration: line-through;
+}

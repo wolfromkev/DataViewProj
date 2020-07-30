@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/date-fns": "^2.8.0",
+    "@date-io/moment": "^1.3.13",
     "@fullcalendar/core": "^5.1.0",
     "@fullcalendar/daygrid": "^5.1.0",
     "@fullcalendar/interaction": "^5.1.0",
+    "@fullcalendar/moment": "^5.1.0",
     "@fullcalendar/react": "^5.1.0",
     "@fullcalendar/timegrid": "^5.1.0",
     "@material-ui/core": "^4.11.0",
@@ -24,6 +27,7 @@
     "oidc-client": "^1.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.0.0",
+    "react-datetime-picker": "^3.0.2",
     "react-dom": "^16.0.0",
     "react-redux": "^7.2.0",
     "react-router-bootstrap": "^0.25.0",
@@ -39,6 +43,7 @@
     "yup": "^0.29.1"
   },
   "devDependencies": {
+    "@material-ui/pickers": "^3.2.10",
     "ajv": "^6.9.1",
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",

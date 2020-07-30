@@ -67,6 +67,7 @@ namespace DataViewBackend.Controllers
             }
             return Ok(objDto);
         }
+        
         [AllowAnonymous] 
         [HttpPatch("[action]")]
         public IActionResult UpdateUserData([FromBody] UpdateUserDataDto userData)
@@ -78,6 +79,7 @@ namespace DataViewBackend.Controllers
             }
             return Ok(userData);
         }
+        
         [AllowAnonymous] 
         [HttpPatch("[action]")]
         public IActionResult UpdateUserImage([FromBody] UpdateUserImageDto userData)

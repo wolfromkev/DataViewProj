@@ -26,12 +26,14 @@ function LoginForm(props) {
     onSubmit: (values) => {
       const userData = { email: values.email, password: values.password };
       props.loginUser(userData);
+      window.location.href = "/dashboard";
     },
   });
 
   const demoButton = () => {
     const userData = { email: "kevin", password: "kevin" };
     props.loginUser(userData);
+    window.location.href = "/dashboard";
   };
 
   return (

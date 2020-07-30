@@ -1,0 +1,79 @@
+.header {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 30px;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+.Description {
+  word-wrap: break-word;
+  margin: 1rem;
+  border: none;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.deleteButton {
+  flex: 1;
+}
+
+.footer {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.timeValues {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.ecdEditToggle,
+.descEditToggle {
+  position: absolute;
+  cursor: pointer;
+  right: 1rem;
+}
+
+.descEditToggle {
+  top: 15.3rem;
+}
+
+.ecdEditToggle {
+  top: 9rem;
+}
+
+.descriptionTextArea {
+  color: #ffffff;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.descriptionTextArea:focus {
+  border-bottom: 1px solid #00b8d2;
+}
+
+.assinged {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.taskValues {
+  border-bottom: 1px solid #00b8d2;
+}
+.dateTimePicker {
+  & label {
+    color: white !important;
+  }
+  & ::after {
+    border-bottom: 1px solid #00b8d2 !important;
+  }
+}

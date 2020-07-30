@@ -52,13 +52,10 @@ function ProductView(props) {
           <CardHeader className={classes.header}>
             <Row>
               <Col className={classNames("text-left", classes.title)} sm="6">
-                <h5 className="card-category" onClick={toggleModal}>
-                  Product Overview
-                </h5>
-                <CardTitle tag="h2">
-                  Product ID: {product} -{" "}
+                <h5 className="card-category">
                   {graphData ? graphData.totalData[5] : null} Total Defects
-                </CardTitle>
+                </h5>
+                <CardTitle tag="h2">Product ID: {product} </CardTitle>
               </Col>
               <Col sm="6">
                 <div className={classes.searchBox}>

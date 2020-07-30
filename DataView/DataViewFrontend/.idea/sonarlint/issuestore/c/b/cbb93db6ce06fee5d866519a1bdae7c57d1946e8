@@ -1,0 +1,10 @@
+
+Qjavascript:S1854@"5Remove this useless assignment to variable "ecdTemp".(∆Ûô◊
+Vjavascript:S1481A":Remove the declaration of the unused 'setNewECD' variable.(Ú∫‚º
+Tjavascript:S1854@"8Remove this useless assignment to variable "setEcdTemp".(∆Ûô◊
+Gjavascript:S1128"&Remove this unused import of 'Cleave'.(–‹–µ¯ˇˇˇˇ
+Tjavascript:S1854>"8Remove this useless assignment to variable "setNewDesc".(›„ﬂ’
+Tjavascript:S1481@"8Remove the declaration of the unused 'ecdTemp' variable.(∆Ûô◊
+Wjavascript:S1481@";Remove the declaration of the unused 'setEcdTemp' variable.(∆Ûô◊
+Wjavascript:S1481>";Remove the declaration of the unused 'setNewDesc' variable.(›„ﬂ’
+Sjavascript:S1854A"7Remove this useless assignment to variable "setNewECD".(Ú∫‚º

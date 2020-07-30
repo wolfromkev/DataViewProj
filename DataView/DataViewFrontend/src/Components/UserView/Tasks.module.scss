@@ -1,0 +1,28 @@
+.toDoListBody {
+  background-color: #1c1c1c;
+  color: white;
+  border-radius: 5px;
+}
+
+.buttonRow {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.completeItems,
+.addItems {
+  & .focus {
+    outline: none;
+  }
+}
+.buttonContainer {
+  padding: 1rem 1rem 0 0;
+}
+
+.toDoListContainer {
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+  border-radius: 5px;
+}
