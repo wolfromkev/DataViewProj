@@ -59,7 +59,6 @@ function NewTaskModal(props) {
 
   const handleChange = (event) => {
     setUserSearch(event.target.value);
-
     props.searchUserData(userSearch);
     setPopperObj(event.currentTarget);
   };

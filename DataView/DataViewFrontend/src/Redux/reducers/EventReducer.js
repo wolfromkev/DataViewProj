@@ -17,7 +17,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_EVENTS:
-      console.log(action.payload);
       return {
         ...state,
         eventData: action.payload,

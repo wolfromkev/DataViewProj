@@ -44,6 +44,45 @@
 .ecdEditToggle {
   top: 9rem;
 }
+.editTitle {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 30px;
+  border: none;
+  color: white;
+  width: 100%;
+  border-bottom: 1px solid #00b8d2;
+  background-color: #1c1c1c;
+}
+.errorMessage {
+  position: relative;
+  color: #ff4747;
+}
+.cleave2 {
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #00b8d2;
+  outline: none;
+  background: transparent;
+  width: 45%;
+  margin-right: 1rem;
+}
+
+.createButton {
+  background-color: #0065a3;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: #0071b8;
+  }
+}
 
 .descriptionTextArea {
   color: #ffffff;
@@ -52,11 +91,6 @@
   border: none;
   outline: none;
   background: transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-}
-
-.descriptionTextArea:focus {
   border-bottom: 1px solid #00b8d2;
 }
 
@@ -70,10 +104,5 @@
   border-bottom: 1px solid #00b8d2;
 }
 .dateTimePicker {
-  & label {
-    color: white !important;
-  }
-  & ::after {
-    border-bottom: 1px solid #00b8d2 !important;
-  }
+  border-bottom: 1px solid #00b8d2 !important;
 }

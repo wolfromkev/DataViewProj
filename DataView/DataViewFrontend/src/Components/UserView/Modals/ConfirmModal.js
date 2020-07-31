@@ -13,7 +13,7 @@ export default function ConfirmModal(props) {
 
   const confirmHandler = () => {
     setConfirmPressed(true);
-    props.deleteHandler();
+    props.confirmHandler();
   };
 
   useEffect(() => {
@@ -22,6 +22,9 @@ export default function ConfirmModal(props) {
     } else if (confirmPressed && !props.loadingType) {
       setLoading(false);
       props.handleClose();
+      if (props.handleFinish) {
+        props.handleFinish();
+      }
     }
   }, [props.loadingType]);
   return (

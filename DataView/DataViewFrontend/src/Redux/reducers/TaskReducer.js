@@ -39,11 +39,12 @@ export default function (state = initialState, action) {
       };
 
     case UPDATE_TASK:
+      console.log(action.payload);
       let updatedArray = state.tasks;
-      let tempIndex = updatedArray.findIndex((a) => a.id === action.payload.id);
-      updatedArray[tempIndex].status = action.payload.status;
-      updatedArray[tempIndex].description = action.payload.description;
-      updatedArray[tempIndex].end = action.payload.end;
+      let tempIndex = updatedArray.findIndex((a) => a.id === action.payload.Id);
+      updatedArray[tempIndex].title = action.payload.Title;
+      updatedArray[tempIndex].description = action.payload.Description;
+      updatedArray[tempIndex].end = action.payload.End;
 
       return {
         ...state,

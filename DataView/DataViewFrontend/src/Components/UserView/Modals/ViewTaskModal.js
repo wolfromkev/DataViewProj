@@ -1,110 +1,69 @@
 import React, { useState } from "react";
 import { Button, ModalFooter } from "reactstrap";
 import classes from "./ViewTaskModal.module.scss";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import ConfirmModal from "./ConfirmModal";
-import MomentUtils from "@date-io/moment";
-
-import lightBlue from "@material-ui/core/colors/lightBlue";
-import { DateTimePicker } from "@material-ui/pickers";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { createMuiTheme } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
-
-const materialTheme = createMuiTheme({
-  overrides: {
-    MuiPickersToolbar: {
-      toolbar: {
-        backgroundColor: lightBlue.A200,
-      },
-    },
-    MuiPickerDTTabs: {
-      tabs: {
-        backgroundColor: lightBlue.A200,
-      },
-    },
-
-    MuiPickersCalendarHeader: {
-      switchHeader: {
-        backgroundColor: lightBlue.A200,
-      },
-    },
-    MuiPickersDay: {
-      day: {
-        color: lightBlue.A700,
-      },
-      daySelected: {
-        backgroundColor: lightBlue["400"],
-      },
-      dayDisabled: {
-        color: lightBlue["100"],
-      },
-      current: {
-        color: lightBlue["900"],
-      },
-    },
-    MuiPickersModal: {
-      dialogRoot: {
-        backgroundColor: "#1c1c1c",
-      },
-      dialogAction: {
-        color: lightBlue["400"],
-      },
-    },
-  },
-});
-let ECD = "2020-07-15 12:00am";
+import { connect } from "react-redux";
+import { DeleteTask, UpdateTask } from "../../../Redux/actions/TaskActions";
+import moment from "moment";
+import DateTimeSelect from "../../General/DateTimeSelect";
 
 function ViewTaskModal(props) {
-  const [DescTemp, setDescTemp] = useState();
-  const [newDesc, setNewDesc] = useState(props.data.description);
-
-  const [newECD, setNewECD] = useState(ECD); //Set this to props.data.end
-
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [DescTemp, setDescTemp] = useState(props.data.description);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
+  const [title, setTitle] = useState(props.data.title);
+  const [openUpdateConfirmModal, setOpenUpdateConfirmModal] = useState(false);
+  const [openDeleteConfirmModal, setDeleteOpenConfirmModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
-  const handleDateChange = (date) => {
+  const deleteHandler = () => {
+    props.DeleteTask(props.data.id);
+  };
+
+  const handleDeleteModal = () => {
+    setDeleteOpenConfirmModal(!openDeleteConfirmModal);
+  };
+
+  const updateHandler = () => {
+    // prettier-ignore
+    const submitObj = {
+      "Id": props.data.id,
+      "Title": title,
+      "Description": DescTemp,
+      "End": selectedDate.toISOString(),
+    };
+    props.UpdateTask(submitObj);
+  };
+
+  const handleUpdateModal = () => {
+    setOpenUpdateConfirmModal(!openUpdateConfirmModal);
+  };
+
+  const handleFinish = () => {
+    props.toggleEvent();
+  };
+
+  const selectDate = (date) => {
     setSelectedDate(date);
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      description: "",
-      ecd: "",
-    },
-    validationSchema: yup.object().shape({
-      description: yup.string().required("Required"),
-      ecd: yup.string().min(16).required(),
-    }),
-
-    onSubmit: () => {
-      console.log(formik.values);
-      props.toggleDate();
-    },
-  });
-
-  const handleClose = () => {
-    setOpenConfirmModal(!openConfirmModal);
-  };
-
-  const handleClickOpen = () => {
-    setOpenConfirmModal(!openConfirmModal);
-  };
-
-  const confirmHandler = () => {
-    console.log(props.data);
   };
 
   const editToggler = () => {
     setEditMode(!editMode);
   };
-  console.log(selectedDate.toISOString());
+
   return (
     <>
-      <div className={classes.header}>{props.data.title}</div>{" "}
+      {editMode ? (
+        <input
+          className={classes.editTitle}
+          type="text"
+          name="title"
+          placeholder={props.data.title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      ) : (
+        <div className={classes.header}>{props.data.title}</div>
+      )}
+
       <>
         <div className={classes.assinged}>
           Assigned By: {props.data.assignerName}
@@ -114,22 +73,12 @@ function ViewTaskModal(props) {
             {" "}
             <h5>ECD:</h5>
             {editMode ? (
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <ThemeProvider theme={materialTheme}>
-                  <DateTimePicker
-                    autoOk={true}
-                    disablePast
-                    allowKeyboardControl={true}
-                    animateYearScrolling={true}
-                    className={classes.dateTimePicker}
-                    inputVariant="standard"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                  />
-                </ThemeProvider>
-              </MuiPickersUtilsProvider>
+              <DateTimeSelect
+                className={classes.cleave2}
+                selectDate={selectDate}
+              />
             ) : (
-              <div> {newECD} </div>
+              <div> {moment().format("MMMM Do, h:mm a")} </div>
             )}
           </div>
         </div>
@@ -138,43 +87,76 @@ function ViewTaskModal(props) {
             <h5>Description: </h5>
           </div>
           {editMode ? (
-            <textarea
-              name="description"
-              {...formik.getFieldProps("description")}
-              placeholder={newDesc}
-              value={DescTemp}
-              rows="1"
-              cols="50"
-              className={classes.descriptionTextArea}
-              onChange={(event) => setDescTemp(event.target.value)}
-            />
+            <>
+              <textarea
+                name="description"
+                placeholder={props.data.description}
+                value={DescTemp}
+                rows="1"
+                cols="50"
+                className={classes.descriptionTextArea}
+                onChange={(event) => setDescTemp(event.target.value)}
+              />
+            </>
           ) : (
-            <div> {newDesc}</div>
+            <div> {props.data.description}</div>
           )}
         </div>
       </>
+
       <ModalFooter className={classes.footer}>
         <div className={classes.deleteButton}>
-          <Button onClick={handleClickOpen}>Delete Task</Button>
+          <Button onClick={handleDeleteModal}>Delete Task</Button>
         </div>
         <div className={classes.buttonContainer}>
-          <Button color="primary" onClick={editToggler}>
-            {editMode ? "Save Changes" : "Edit Task"}
-          </Button>
+          {editMode ? (
+            <button
+              onClick={handleUpdateModal}
+              className={classes.createButton}
+            >
+              Save Edits
+            </button>
+          ) : (
+            <button onClick={editToggler} className={classes.createButton}>
+              Edit Task
+            </button>
+          )}
+
           <Button color="secondary" onClick={props.toggleEvent}>
             Cancel
           </Button>
         </div>
       </ModalFooter>
+
       <ConfirmModal
         title={"Delete task?"}
         description={"Are you sure you want to delete this task?"}
-        open={openConfirmModal}
-        handleClose={handleClose}
-        confirmHandler={confirmHandler}
+        open={openDeleteConfirmModal}
+        loadingType={props.loadingDelete}
+        handleClose={handleDeleteModal}
+        confirmHandler={deleteHandler}
+        handleFinish={handleFinish}
+      />
+      <ConfirmModal
+        title={"Update task?"}
+        description={"Are you sure you want to update this task?"}
+        open={openUpdateConfirmModal}
+        handleClose={handleUpdateModal}
+        loadingType={props.loadingUpdateTask}
+        confirmHandler={updateHandler}
+        handleFinish={handleFinish}
       />
     </>
   );
 }
+const mapStateToProps = (state) => ({
+  loadingDelete: state.tasks.loadingDeleteTask,
+  loadingUpdateTask: state.tasks.loadingUpdateTask,
+});
 
-export default ViewTaskModal;
+const mapDispatchToProps = {
+  UpdateTask,
+  DeleteTask,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskModal);

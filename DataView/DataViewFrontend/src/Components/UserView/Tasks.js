@@ -43,7 +43,7 @@ function Tasks(props) {
     <Fragment>
       <span className={classes.buttonRow}>
         <div className={classes.buttonContainer}>
-          {props.loading ? (
+          {props.loadingCompleteTask ? (
             <CircularProgress color="secondary" />
           ) : (
             <>
@@ -118,7 +118,7 @@ function Tasks(props) {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.tasks.loading,
+  loadingCompleteTask: state.tasks.loadingCompleteTask,
 });
 
 const mapDispatchToProps = {

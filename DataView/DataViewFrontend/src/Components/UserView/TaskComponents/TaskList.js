@@ -196,7 +196,7 @@ function TaskList(props) {
         open={openConfirmModal}
         handleClose={handleClose}
         loadingType={props.loadingDelete}
-        deleteHandler={deleteHandler}
+        confirmHandler={deleteHandler}
       />
     </Fragment>
   );

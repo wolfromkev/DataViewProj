@@ -10,11 +10,6 @@ import userDataReducer from "./reducers/userDataReducer";
 import TaskReducer from "./reducers/TaskReducer";
 import EventReducer from "./reducers/EventReducer";
 
-const persistConfig = {
-  key: "root",
-  storage: storage,
-};
-
 const reducers = combineReducers({
   miscData: miscDataReducer,
   productData: productDataReducer,
@@ -22,6 +17,12 @@ const reducers = combineReducers({
   tasks: TaskReducer,
   events: EventReducer,
 });
+
+const persistConfig = {
+  key: "root",
+  storage: storage,
+  blacklist: ["tasks", "events", "userData"],
+};
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

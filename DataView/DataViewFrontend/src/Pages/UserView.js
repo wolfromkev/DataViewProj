@@ -38,7 +38,7 @@ function UserView(props) {
     setNewTaskModal(!newTaskModal);
   };
 
-  let filteredTasks = taskFormatter(props.taskData[0], props.userId);
+  let filteredTasks = taskFormatter(props.taskData, props.userId);
   return (
     <Fragment>
       <div className={classes.gridContainer}>

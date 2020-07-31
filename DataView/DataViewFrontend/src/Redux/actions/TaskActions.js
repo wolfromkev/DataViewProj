@@ -53,6 +53,7 @@ export const UpdateTask = (taskObj) => (dispatch) => {
       dispatch({ type: CLEAR_TASK_ERRORS });
     })
     .catch((err) => {
+      console.log(err);
       dispatch({
         type: SET_TASK_ERRORS,
         payload: err.response.data,

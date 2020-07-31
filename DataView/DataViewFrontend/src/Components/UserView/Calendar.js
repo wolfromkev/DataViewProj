@@ -53,9 +53,8 @@ function CalendarComp(props) {
         end: props.eventData[i].end,
       });
     }
-    let inputArray = [...eventData].concat(tempTasks);
-    setEventData(inputArray);
-  }, [props.eventData]);
+    setEventData(tempTasks);
+  }, [props.eventData, props.tasks]);
 
   return (
     <div className={classes.calendarInnerContainer}>
