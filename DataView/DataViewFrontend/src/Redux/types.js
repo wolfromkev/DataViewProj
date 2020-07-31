@@ -8,7 +8,7 @@ export const GET_UPCOMING_PROD_DATA = "GET_UPCOMING_PROD_DATA";
 
 export const SEARCH_USERS = "SEARCH_USERS";
 export const SET_USERS = "SET_USERS";
-
+export const CLEAR_USERS = "CLEAR_USERS";
 //User Data
 export const SET_USER = "SET_USER";
 export const UPDATE_USER_IMAGE = "UPDATE_USER_IMAGE";
@@ -25,12 +25,15 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const SET_TASKS = "SET_TASKS";
 export const FETCH_DATA = "FETCH_DATA";
 export const CREATE_TASKS = "CREATE_TASKS";
+export const CREATE_TASKS_LOADING = "CREATE_TASKS_LOADING";
 export const UPDATE_TASK = "UPDATE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const SET_TASK_ERRORS = "SET_EVENT_ERRORS";
 export const CLEAR_TASK_ERRORS = "CLEAR_EVENT_ERRORS";
 export const COMPLETE_TASK = "COMPLETE_TASK";
-
+export const COMPLETE_TASK_LOADING = "COMPLETE_TASK_LOADING";
+export const UPDATE_TASK_LOADING = "UPDATE_TASK_LOADING";
+export const DELETE_TASK_LOADING = "DELETE_TASK_LOADING";
 //Event reducer
 export const FETCH_EVENT_DATA = "FETCH_EVENT_DATA";
 export const GET_EVENTS = "GET_EVENTS";

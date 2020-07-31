@@ -12,7 +12,7 @@ namespace DataViewBackend.Repository.IRepository
         Task GetTask(int taskId);
         bool TaskExists(int id);
         
-        bool CreateTasks(TaskDto tasks);
+        ICollection<Task> CreateTasks(TaskDto tasks);
         bool UpdateTask(UpdateTaskDto task);
         bool DeleteTask(int taskId);
         bool CompleteTask(IEnumerable<CompleteTaskDto> tasks);

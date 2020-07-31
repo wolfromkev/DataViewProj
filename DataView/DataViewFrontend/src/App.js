@@ -39,22 +39,23 @@ function App(props) {
     }
   }, [token]);
 
-  if (props.productData.length == 0 || !props.productData) {
-    props.getAllProductData();
+  if (props.authenticated) {
+    if (props.productData.length === 0) {
+      props.getAllProductData();
+    }
+    if (props.yieldData.length === 0) {
+      props.getYieldData();
+    }
+    if (props.upcomingProductData.length === 0) {
+      props.getUpcomingProductData();
+    }
+    if (props.taskData.length === 0) {
+      props.GetTasks(props.userData.id);
+    }
+    if (props.eventData.length === 0) {
+      props.GetEvents(props.userData.id);
+    }
   }
-  if (props.yieldData.length == 0 || !props.yieldData) {
-    props.getYieldData();
-  }
-  if (props.upcomingProductData.length == 0 || !props.upcomingProductData) {
-    props.getUpcomingProductData();
-  }
-  if (props.taskData.length == 0 || !props.taskData) {
-    props.GetTasks(props.userData.id);
-  }
-  if (props.eventData.length == 0 || !props.eventData) {
-    props.GetEvents(props.userData.id);
-  }
-
   return (
     <BrowserRouter>
       {!auth ? (
@@ -62,7 +63,7 @@ function App(props) {
       ) : (
         <>
           {" "}
-          <NavbarComponent persitor={props.persitorProp} />
+          <NavbarComponent persitor={props.persistBool} />
           <Switch>
             <div className={classes.container}>
               <Route exact path="/dashboard" component={Dashboard} />

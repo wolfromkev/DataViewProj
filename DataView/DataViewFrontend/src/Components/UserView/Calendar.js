@@ -25,7 +25,6 @@ function CalendarComp(props) {
         title: props.tasks.assignedTasks[i].title,
         description: props.tasks.assignedTasks[i].description,
         date: props.tasks.assignedTasks[i].end,
-        color: "red",
       });
     }
 
@@ -35,7 +34,6 @@ function CalendarComp(props) {
         title: props.tasks.outgoingTasks[i].title,
         description: props.tasks.outgoingTasks[i].description,
         date: props.tasks.outgoingTasks[i].end,
-        color: "yellow",
       });
     }
     for (let i = 0; i < props.tasks.personalTasks.length; i++) {
@@ -44,7 +42,6 @@ function CalendarComp(props) {
         title: props.tasks.personalTasks[i].title,
         description: props.tasks.personalTasks[i].description,
         date: props.tasks.personalTasks[i].end,
-        color: "green",
       });
     }
     for (let i = 0; i < props.eventData.length; i++) {
@@ -54,7 +51,6 @@ function CalendarComp(props) {
         description: props.eventData[i].description,
         start: props.eventData[i].start,
         end: props.eventData[i].end,
-        color: "blue",
       });
     }
     let inputArray = [...eventData].concat(tempTasks);

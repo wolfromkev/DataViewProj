@@ -13,20 +13,17 @@ namespace DataViewBackend.Controllers
     {
         private IEventRepository _evRepo;
         private readonly IMapper _mapper;
-        
         public EventController(IEventRepository evRepo, IMapper mapper)
         {
             _evRepo = evRepo;
             _mapper = mapper;
         }
-        
         [HttpGet("[action]/{userId:int}")] 
         public IActionResult GetEvents(int userId)
         {
             var objList = _evRepo.GetEvents(userId).ToList();
             return Ok(objList);
         }
-
         [HttpPost("[action]")]
         public IActionResult CreateEvent([FromBody] CreateEventDto eventObj)
         {
@@ -37,7 +34,6 @@ namespace DataViewBackend.Controllers
             var objList = _evRepo.CreateEvent(eventObj);
             return Ok(objList);
         }
-        
         [HttpPatch("[action]/{userId:int}")]
         public IActionResult UpdateEvent(int userId, [FromBody] UpdateEventDto eventObj)
         {
@@ -54,7 +50,6 @@ namespace DataViewBackend.Controllers
             }
             return Ok(eventObj);
         }
-        
         [HttpDelete("[action]/{eventId:int}+{userId:int}")]
         public IActionResult DeleteEvent(int eventId, int userId)
         {

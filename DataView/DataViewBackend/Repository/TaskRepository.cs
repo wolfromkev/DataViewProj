@@ -29,9 +29,9 @@ namespace DataViewBackend.Repository
             return value;
         }
 
-        public bool CreateTasks(TaskDto tasks) //Fix
+        public ICollection<Task> CreateTasks(TaskDto tasks) //Fix
         {
-            
+            var returnTasks = new List<Task>();
             foreach (int assigneeId in tasks.Users)
             {
                 var userFullname = _db.UserData.FirstOrDefault(a => a.Id == assigneeId);
@@ -48,8 +48,12 @@ namespace DataViewBackend.Repository
                     End = tasks.End,
                 };
                 _db.Task.Add(eventObj);
+                Save();
+                returnTasks.Add(eventObj);
+                
             }
-            return Save();
+    
+            return returnTasks;
         }
         public bool UpdateTask(UpdateTaskDto task) //Fix
         {

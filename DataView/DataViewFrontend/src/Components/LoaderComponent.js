@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./LoaderComponent.module.scss";
-import PropTypes from "prop-types";
 
 const LoaderComponent = () => {
   return (
@@ -19,7 +18,5 @@ const LoaderComponent = () => {
     </div>
   );
 };
-
-LoaderComponent.propTypes = {};
 
 export default LoaderComponent;

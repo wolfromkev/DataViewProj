@@ -8,12 +8,10 @@ namespace DataViewBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class ProductDataController : Controller
     {
         private IProductDataRepository _pdRepo;
         private readonly IMapper _mapper;
-        
         public ProductDataController(IProductDataRepository pdRepo, IMapper mapper)
         {
             _pdRepo = pdRepo;
@@ -30,7 +28,6 @@ namespace DataViewBackend.Controllers
             }
             return Ok(objDto);
         }
-        
         [HttpGet("{productDataId:int}", Name="GetProductData")]
         public IActionResult GetProductData(int productDataId)
         {
@@ -39,7 +36,6 @@ namespace DataViewBackend.Controllers
             {
                 return NotFound();
             }
-
             var objDto = _mapper.Map<ProductDataDto>(obj);
             return Ok(objDto);
         }

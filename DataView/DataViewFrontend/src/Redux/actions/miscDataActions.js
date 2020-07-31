@@ -4,6 +4,7 @@ import {
   GET_UPCOMING_PROD_DATA,
   SEARCH_USERS,
   SET_USERS,
+  CLEAR_USERS,
 } from "../types";
 
 import axios from "axios";
@@ -45,19 +46,20 @@ export const getUpcomingProductData = () => (dispatch) => {
 };
 
 export const searchUserData = (query) => (dispatch) => {
+  dispatch({ type: CLEAR_USERS });
   dispatch({ type: SEARCH_USERS });
   axios
     .get(`/UserData/searchUserData/${query}`)
     .then((res) => {
+      dispatch({ type: CLEAR_USERS });
       dispatch({
         type: SET_USERS,
         payload: res.data,
       });
     })
-    .catch((err) => {
-      dispatch({
-        type: GET_UPCOMING_PROD_DATA,
-        payload: [],
-      });
-    });
+    .catch((err) => {});
+};
+
+export const clearSearchedUsers = () => (dispatch) => {
+  dispatch({ type: CLEAR_USERS });
 };

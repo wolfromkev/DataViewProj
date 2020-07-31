@@ -94,7 +94,7 @@ namespace DataViewBackend.Repository
 
         public ICollection<UserData> SearchUserData(string query)
         {
-            return _db.UserData.Where(a => a.FirstName.Contains(query) || a.LastName.Contains(query)).ToList();
+            return _db.UserData.Where(a => (a.FirstName +" " + a.LastName).Contains(query)).ToList();
         }
 
         public UserData GetUserData(int userId)

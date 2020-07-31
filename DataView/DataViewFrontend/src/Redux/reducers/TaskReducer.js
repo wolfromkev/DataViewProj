@@ -1,16 +1,24 @@
 import {
   SET_TASKS,
   FETCH_DATA,
-  UPDATE_TASK,
-  CREATE_TASKS,
-  DELETE_TASK,
   SET_TASK_ERRORS,
   CLEAR_TASK_ERRORS,
   COMPLETE_TASK,
+  COMPLETE_TASK_LOADING,
+  UPDATE_TASK,
+  UPDATE_TASK_LOADING,
+  CREATE_TASKS,
+  CREATE_TASKS_LOADING,
+  DELETE_TASK,
+  DELETE_TASK_LOADING,
 } from "../types";
 
 const initialState = {
   loading: false,
+  loadingCreateTask: false,
+  loadingCompleteTask: false,
+  loadingUpdateTask: false,
+  loadingDeleteTask: false,
   tasks: [],
   errors: null,
 };
@@ -32,7 +40,7 @@ export default function (state = initialState, action) {
 
     case UPDATE_TASK:
       let updatedArray = state.tasks;
-      let tempIndex = updatedArray.indexOf(action.payload.id);
+      let tempIndex = updatedArray.findIndex((a) => a.id === action.payload.id);
       updatedArray[tempIndex].status = action.payload.status;
       updatedArray[tempIndex].description = action.payload.description;
       updatedArray[tempIndex].end = action.payload.end;
@@ -40,24 +48,59 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tasks: updatedArray,
-        loading: false,
+        loadingUpdateTask: false,
       };
 
     case CREATE_TASKS:
+      let createTasks = state.tasks;
+      createTasks.concat(action.payload);
       return {
         ...state,
-        tasks: state.tasks.concat(action.payload),
-        loading: false,
+        tasks: createTasks,
+        loadingCreateTask: false,
       };
 
     case DELETE_TASK:
-      let tempTasks = state.tasks.filter((a) => a.Id == action.payload);
+      let tempTasks = state.tasks.filter((a) => a.id !== action.payload);
       return {
         ...state,
         tasks: tempTasks,
-        loading: false,
+        loadingDeleteTask: false,
+      };
+    case COMPLETE_TASK:
+      let updateArray = state.tasks;
+      for (let i = 0; i < action.payload.length; i++) {
+        let tempIndex = updateArray.findIndex(
+          (a) => a.id === action.payload[i].taskId
+        );
+        updateArray[tempIndex].completed = action.payload[i].status;
+      }
+      return {
+        ...state,
+        tasks: updateArray,
+        loadingCompleteTask: false,
+      };
+    case CREATE_TASKS_LOADING:
+      return {
+        ...state,
+        loadingCreateTask: true,
+      };
+    case UPDATE_TASK_LOADING:
+      return {
+        ...state,
+        loadingUpdateTask: true,
       };
 
+    case DELETE_TASK_LOADING:
+      return {
+        ...state,
+        loadingDeleteTask: true,
+      };
+    case COMPLETE_TASK_LOADING:
+      return {
+        ...state,
+        loadingCompleteTask: true,
+      };
     case SET_TASK_ERRORS:
       return {
         ...state,
@@ -70,20 +113,10 @@ export default function (state = initialState, action) {
         ...state,
         errors: false,
         loading: false,
-      };
-    case COMPLETE_TASK:
-      let updateArray = state.tasks[0];
-      let userId = state.tasks[1];
-      for (let i = 0; i < action.payload.length; i++) {
-        let tempIndex = updateArray.findIndex(
-          (a) => a.id == action.payload[i].taskId
-        );
-        updateArray[tempIndex].completed = action.payload[i].status;
-      }
-      return {
-        ...state,
-        tasks: [updateArray, userId],
-        loading: false,
+        loadingCreateTask: false,
+        loadingCompleteTask: false,
+        loadingUpdateTask: false,
+        loadingDeleteTask: false,
       };
 
     default:

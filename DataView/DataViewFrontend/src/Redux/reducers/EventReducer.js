@@ -32,8 +32,8 @@ export default function (state = initialState, action) {
 
     case UPDATE_EVENT:
       let tempUpdateData = state.eventData.slice();
-      let tempEvent = tempUpdateData.find((e) => e.Id == action.payload.Id);
-      tempUpdateData.filter((e) => e.Id == action.payload.Id);
+      let tempEvent = tempUpdateData.find((e) => e.Id === action.payload.Id);
+      tempUpdateData.filter((e) => e.Id === action.payload.Id);
       return {
         ...state,
         eventData: tempUpdateData.push(tempEvent),
@@ -49,7 +49,7 @@ export default function (state = initialState, action) {
 
     case DELETE_EVENT:
       let tempEventData = state.eventData.slice();
-      tempEventData.filter((e) => e.Id == action.payload);
+      tempEventData.filter((e) => e.Id === action.payload);
       return {
         ...state,
         eventData: tempEventData,

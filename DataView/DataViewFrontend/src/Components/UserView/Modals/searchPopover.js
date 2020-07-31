@@ -1,42 +1,24 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import classes from "./searchPopover.module.scss";
 import uniqid from "uniqid";
-import arrayFilter from "../../../Utility/arrayFilter";
 import { connect } from "react-redux";
 import {
   Typography,
   ListItemText,
   List,
   ListItem,
+  CircularProgress,
   Divider,
 } from "@material-ui/core";
 
-const users = [
-  { name: "Kevin Wolfrom", email: "kevin@kevin.com" },
-  { name: "Bill B." },
-  { name: "John G" },
-  { name: "Mike M." },
-  { name: "Bill B." },
-  { name: "John G" },
-  { name: "Mike M." },
-  { name: "Bill B." },
-  { name: "John G" },
-  { name: "Mike M." },
-  { name: "Bill B." },
-  { name: "John G" },
-  { name: "Mike M." },
-  { name: "Bill B." },
-  { name: "John G" },
-  { name: "Mike M." },
-];
+function SearchPopover(props) {
+  const [users, setUsers] = useState(props.users);
 
-function SearchModal(props) {
-  let userData = props.search
-    ? arrayFilter(props.users, props.userSearch)
-    : null;
+  useEffect(() => {
+    setUsers(props.users);
+  }, [props.users]);
 
   function selectUser(user) {
-    props.clearSearch();
     props.addUser(user);
   }
 
@@ -45,8 +27,14 @@ function SearchModal(props) {
       users.map((user) => {
         return (
           <Fragment key={uniqid()}>
-            <ListItem key={user.name} button onClick={() => selectUser(user)}>
-              <ListItemText id={user.name} primary={`${user.name}`} />
+            <ListItem
+              key={user.fullName}
+              button
+              autoFocus={true}
+              divider={true}
+              onClick={() => selectUser(user)}
+            >
+              <ListItemText primary={`${user.fullName}`} />
             </ListItem>
             <Divider variant="middle" />
           </Fragment>
@@ -54,10 +42,13 @@ function SearchModal(props) {
       })
     ) : (
       <Fragment>
-        <Typography className={classes.Typography}>
-          {" "}
-          No users with that handle were found.
-        </Typography>
+        {props.loading ? (
+          <CircularProgress />
+        ) : (
+          <Typography className={classes.Typography}>
+            "No users with that handle were found."{" "}
+          </Typography>
+        )}
       </Fragment>
     );
 
@@ -70,10 +61,11 @@ function SearchModal(props) {
   );
 }
 
-SearchModal.propTypes = {};
+SearchPopover.propTypes = {};
 
 const mapStateToProps = (state) => ({
-  users: state.miscData.userData,
+  users: state.miscData.searchedUsers,
+  loading: state.miscData.loadingUserData,
 });
 
-export default connect(mapStateToProps, null)(SearchModal);
+export default connect(mapStateToProps)(SearchPopover);

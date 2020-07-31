@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 
 function NavbarComponent(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(false);
 
   const logoutHandler = () => {
     props.logoutUser();

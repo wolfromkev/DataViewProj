@@ -5,20 +5,24 @@ import Calendar from "../Components/UserView/Calendar";
 import Tasks from "../Components/UserView/Tasks";
 import UserInfo from "../Components/UserView/UserInfo";
 import taskFormatter from "../Utility/taskFormatter";
-import DateModal from "../Components/UserView/Modals/DataModalSwitch/DateModal";
+import DateModal from "../Components/UserView/Modals/EventTaskSwitch/DateModal";
 import EventModal from "../Components/UserView/Modals/EventModal";
 import { Modal } from "reactstrap";
 import ViewTaskModal from "../Components/UserView/Modals/ViewTaskModal";
+import NewTaskModal from "../Components/UserView/Modals/NewTaskModal";
 
 function UserView(props) {
   const [dateModal, setDateModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
   const [viewTaskModal, setViewTaskModal] = useState(false);
+  const [newTaskModal, setNewTaskModal] = useState(false);
+
   const [viewTaskModalData, setViewTaskModalData] = useState({});
 
   const toggleDate = () => {
     setDateModal(!dateModal);
   };
+
   const toggleEvent = () => {
     setEventModal(!eventModal);
   };
@@ -30,7 +34,11 @@ function UserView(props) {
     setViewTaskModal(!viewTaskModal);
   };
 
-  let filteredTasks = taskFormatter(props.taskData[0], props.taskData[1]);
+  const viewNewTask = (value) => {
+    setNewTaskModal(!newTaskModal);
+  };
+
+  let filteredTasks = taskFormatter(props.taskData[0], props.userId);
   return (
     <Fragment>
       <div className={classes.gridContainer}>
@@ -50,6 +58,7 @@ function UserView(props) {
           tasks={filteredTasks}
           toggleViewTask={toggleViewTask}
           viewTaskData={viewTaskData}
+          viewNewTask={viewNewTask}
         />
       </div>
 
@@ -75,12 +84,21 @@ function UserView(props) {
           assigner={""}
         />
       </Modal>
+
+      <Modal
+        isOpen={newTaskModal}
+        toggle={viewNewTask}
+        className={classes.Modal}
+      >
+        <NewTaskModal toggle={viewNewTask} />
+      </Modal>
     </Fragment>
   );
 }
 
 const mapStateToProps = (state) => ({
   taskData: state.tasks.tasks,
+  userId: state.userData.credentials.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

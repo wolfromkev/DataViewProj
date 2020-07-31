@@ -25,8 +25,6 @@ namespace DataViewBackend.Models
         
         public ICollection<EventUsers> Events { get; set; }
         
-        
-        [NotMapped]
         public string FullName {
             get
             {

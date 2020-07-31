@@ -1,21 +1,24 @@
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import classes from "./Tasks.module.scss";
-import { Tooltip, CardBody } from "reactstrap";
-import TaskList from "./TaskComponents/TaskList";
-import Button from "@material-ui/core/Button";
 import { CompleteTask } from "../../Redux/actions/TaskActions";
+import classes from "./Tasks.module.scss";
+import TaskList from "./TaskComponents/TaskList";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
+import { Tooltip, CardBody } from "reactstrap";
 
 function Tasks(props) {
   const [ttComplete, setTTComplete] = useState(false);
   const [ttAdd, setTtAdd] = useState(false);
   const [itemsToComplete, setItemsToComplete] = useState([]);
 
-  const [open, setOpen] = useState(false);
-
   const viewTaskModalData = (value) => {
     props.viewTaskData(value);
+  };
+
+  const viewNewTask = (value) => {
+    props.viewNewTask(value);
   };
 
   const completeItemHandler = (value) => {
@@ -61,7 +64,7 @@ function Tasks(props) {
             id="ttAdd"
             variant="contained"
             className={classes.addItems}
-            onClick={props.toggleDate}
+            onClick={viewNewTask}
           >
             New Task
           </Button>

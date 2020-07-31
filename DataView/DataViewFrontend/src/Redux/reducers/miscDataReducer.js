@@ -4,13 +4,14 @@ import {
   GET_UPCOMING_PROD_DATA,
   SEARCH_USERS,
   SET_USERS,
+  CLEAR_USERS,
 } from "../types";
 
 const initialState = {
   loading: false,
   loadingUserData: false,
   yieldData: [],
-  userData: [],
+  searchedUsers: [],
   upcomingProductData: [],
 };
 
@@ -41,9 +42,16 @@ export default function (state = initialState, action) {
     case SET_USERS:
       return {
         ...state,
-        userData: action.payload,
+        searchedUsers: action.payload,
         loadingUserData: false,
       };
+    case CLEAR_USERS:
+      return {
+        ...state,
+        searchedUsers: [],
+        loadingUserData: false,
+      };
+
     default:
       return state;
   }

@@ -1,0 +1,9 @@
+.dateTimePicker {
+  border-bottom: 1px solid #00b8d2 !important;
+  & label {
+    color: white !important;
+  }
+  & ::after {
+    border-bottom: 0 solid #00b8d2 !important;
+  }
+}

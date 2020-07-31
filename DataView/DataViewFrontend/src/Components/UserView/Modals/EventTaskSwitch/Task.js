@@ -4,7 +4,6 @@ import classes from "./DataModal.module.scss";
 import Popper from "@material-ui/core/Popper";
 import SearchModal from "../searchPopover";
 import uniqid from "uniqid";
-import { Button, ModalFooter } from "reactstrap";
 import { useFormik } from "formik";
 import * as yup from "yup";
 

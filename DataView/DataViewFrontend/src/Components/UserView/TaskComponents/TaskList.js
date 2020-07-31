@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import classes from "./TaskList.module.scss";
 import { Tooltip } from "reactstrap";
@@ -14,7 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LoopIcon from "@material-ui/icons/Loop";
-import { CompleteTask } from "../../../Redux/actions/TaskActions";
+import { CompleteTask, DeleteTask } from "../../../Redux/actions/TaskActions";
 
 function TaskList(props) {
   const [checked, setChecked] = useState([]);
@@ -34,21 +34,16 @@ function TaskList(props) {
     setOpenConfirmModal(!openConfirmModal);
   };
 
-  const confirmHandler = () => {
-    //Delete task
-    setOpenConfirmModal(!openConfirmModal);
-    console.log(activeTask);
+  const deleteHandler = () => {
+    props.DeleteTask(activeTask.id);
   };
 
   const unComplete = (value) => {
     const currentIndex = checked.indexOf(value);
-    console.log(currentIndex);
     const newChecked = [...checked];
-    console.log(newChecked);
     if (currentIndex !== -1) {
       newChecked.splice(currentIndex, 1);
     }
-    console.log(newChecked);
     setChecked(newChecked);
     // prettier-ignore
     let obj = [{"taskId":value.id,"status":false}, {"taskId":21,"status":false}]
@@ -67,8 +62,8 @@ function TaskList(props) {
     props.completeItemHandler(value);
   };
 
-  let completedTasks = props.tasks.filter((a) => a.completed == true);
-  let notFinishedTasks = props.tasks.filter((a) => a.completed == false);
+  let completedTasks = props.tasks.filter((a) => a.completed === true);
+  let notFinishedTasks = props.tasks.filter((a) => a.completed === false);
 
   return (
     <Fragment>
@@ -143,7 +138,7 @@ function TaskList(props) {
                       edge="end"
                       id="finished"
                       aria-label="comments"
-                      onClick={(value) => handleClickOpen(value)}
+                      onClick={() => handleClickOpen(value)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -200,16 +195,20 @@ function TaskList(props) {
         description={"Are you sure you want to delete this task?"}
         open={openConfirmModal}
         handleClose={handleClose}
-        confirmHandler={confirmHandler}
+        loadingType={props.loadingDelete}
+        deleteHandler={deleteHandler}
       />
     </Fragment>
   );
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  loadingDelete: state.tasks.loadingDeleteTask,
+});
 
 const mapDispatchToProps = {
   CompleteTask,
+  DeleteTask,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, ModalFooter } from "reactstrap";
 import classes from "./ViewTaskModal.module.scss";
-import Cleave from "cleave.js/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import ConfirmModal from "./ConfirmModal";
@@ -61,7 +60,6 @@ function ViewTaskModal(props) {
   const [DescTemp, setDescTemp] = useState();
   const [newDesc, setNewDesc] = useState(props.data.description);
 
-  const [ecdTemp, setEcdTemp] = useState();
   const [newECD, setNewECD] = useState(ECD); //Set this to props.data.end
 
   const [selectedDate, setSelectedDate] = useState(new Date());

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, ModalFooter, Tooltip } from "reactstrap";
+import { Button, ModalFooter } from "reactstrap";
 import classes from "./EventModal.module.scss";
 import CreateIcon from "@material-ui/icons/Create";
 import CheckIcon from "@material-ui/icons/Check";
@@ -22,7 +22,7 @@ function EventModal(props) {
   const [ecdEdit, setEcdEdit] = useState(false);
   const [newECD, setNewECD] = useState(ECD);
 
-  const [creator, setCreator] = useState(true);
+  const [creator] = useState(true);
 
   const formik = useFormik({
     initialValues: {

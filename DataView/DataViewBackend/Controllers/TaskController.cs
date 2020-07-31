@@ -33,12 +33,8 @@ namespace DataViewBackend.Controllers
         [HttpPost("[action]")]
         public IActionResult CreateTasks([FromBody] TaskDto tasks)
         {
-            if (!_etRepo.CreateTasks(tasks))
-            {
-                ModelState.AddModelError("", $"Something went wrong when creating the task.");
-                return StatusCode(500, ModelState);
-            }
-            return NoContent();
+            var objList = _etRepo.CreateTasks(tasks).ToList();
+            return Ok(objList);
         }
         
         [HttpPatch("[action]")]
